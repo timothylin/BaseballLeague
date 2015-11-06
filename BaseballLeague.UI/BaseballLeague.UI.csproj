@@ -114,6 +114,16 @@
     <Folder Include="Controllers\" />
     <Folder Include="Models\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BaseballLeague.Models\BaseballLeague.Models.csproj">
+      <Project>{ee2555fe-21cc-47a8-a2e1-bd81be9ddd37}</Project>
+      <Name>BaseballLeague.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BaseballLeagues.BLL\BaseballLeagues.BLL.csproj">
+      <Project>{78169cdc-0e6a-4027-b7b1-3b2f545c164c}</Project>
+      <Name>BaseballLeagues.BLL</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
