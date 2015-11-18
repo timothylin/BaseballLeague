@@ -24,9 +24,6 @@ namespace BaseballLeague.DataLayer
             Teams = new List<Team>();
             Positions = new List<Position>();
             Players = new List<Player>();
-
-
-
         }
 
         public List<Player> GetAllPlayersOnAllTeams()
@@ -35,15 +32,8 @@ namespace BaseballLeague.DataLayer
             using (SqlConnection cn = new SqlConnection(Settings.ConnectionString))
             {
                 SqlCommand cmd = new SqlCommand();
-                cmd.CommandText = "select p.PlayerID, p.PlayerName, p.JerseyNumber, p.BattingAverage," +
-                                   "p.YearsPlayed, ps.PositionName, t.TeamName,t.Manager,l.LeagueName" +
-                                   "from Players p " +
-                                   "inner join Positions ps " +
-                                   "on p.PositionID = ps.PositionID " +
-                                   "inner join Teams t" +
-                                   "on p.TeamID = t.TeamID " +
-                                   "inner join Leagues l " +
-                                   "on l.LeagueID = t.LeagueID ";
+                cmd.CommandText = "GetAllPlayersOnAllTeams";
+                cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Connection = cn;
                 cn.Open();
 
@@ -58,14 +48,11 @@ namespace BaseballLeague.DataLayer
 
             return Players;
         }
-
-
+        
         //gets a list of Players By The Team name 
         public List<Player> GetPlayersByTeamName(string teamName)
         {
             List<Player> Players = new List<Player>();
-
-
             using (var cn = new SqlConnection(Settings.ConnectionString))
             {
                 var cmd = new SqlCommand();
@@ -88,8 +75,6 @@ namespace BaseballLeague.DataLayer
 
             return Players;
         }
-
-
 
         private Player PopulatePlayerFromDataReader(SqlDataReader dr)
         {
