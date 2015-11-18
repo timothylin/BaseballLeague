@@ -10,9 +10,11 @@ using BaseballLeague.Models;
 using Dapper;
 
 namespace BaseballLeague.DataLayer
+
 {
     public class BaseballRepository
     {
+
         public static List<League> Leagues { get; set; }
         public static List<Team> Teams { get; set; }
         public static List<Position> Positions { get; set; }   
@@ -28,7 +30,7 @@ namespace BaseballLeague.DataLayer
 
         public List<Player> GetAllPlayersOnAllTeams()
         {
-            List<Player> Players = new List<Player>();
+            Players = new List<Player>();
             using (SqlConnection cn = new SqlConnection(Settings.ConnectionString))
             {
                 SqlCommand cmd = new SqlCommand();
@@ -51,8 +53,9 @@ namespace BaseballLeague.DataLayer
         
         //gets a list of Players By The Team name 
         public List<Player> GetPlayersByTeamName(string teamName)
-        {
-            List<Player> Players = new List<Player>();
+        { 
+            Players = new List<Player>();
+
             using (var cn = new SqlConnection(Settings.ConnectionString))
             {
                 var cmd = new SqlCommand();
@@ -76,6 +79,52 @@ namespace BaseballLeague.DataLayer
             return Players;
         }
 
+
+        public void CreatePlayer(Player player)
+        {
+
+            using (SqlConnection cn = new SqlConnection(Settings.ConnectionString))
+            {
+                var p = new DynamicParameters();
+
+                p.Add("@PlayerName", player.Name);
+                p.Add("@JerseyNumber", player.JerseyNumber);
+                p.Add("@PositionID", player.Position.PositionID);
+                p.Add("@BattingAverage", player.BattingAverage);
+                p.Add("@YearsPlayed", player.YearsPlayed);
+                p.Add("@TeamID", player.Team.TeamID);
+
+                p.Add("PlayerID", DbType.Int32, direction: ParameterDirection.Output);
+                cn.Execute("InsertPlayer", p, commandType: CommandType.StoredProcedure);
+
+                // var playerID = p.Get<int>("PlayerID");
+
+                cn.Open();
+                cn.Close();
+            }
+
+        }
+
+
+        public void RemovePlayer(int playerID)
+        {
+            using (SqlConnection cn = new SqlConnection(Settings.ConnectionString))
+            {
+                SqlCommand cmd = new SqlCommand();
+
+                cmd.CommandText = "delete Players " +
+                                "where PlayerID = @playerID";
+
+                cmd.Connection = cn;
+                cmd.Parameters.AddWithValue("@playerID", playerID);
+                cn.Open();
+                cmd.ExecuteNonQuery();
+                cn.Close();
+
+            }
+
+        }
+
         private Player PopulatePlayerFromDataReader(SqlDataReader dr)
         {
             var player = new Player();
@@ -91,5 +140,8 @@ namespace BaseballLeague.DataLayer
 
             return player;
         }
+
+
+
     }
 }
