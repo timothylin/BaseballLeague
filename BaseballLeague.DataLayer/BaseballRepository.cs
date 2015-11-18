@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,87 @@ namespace BaseballLeague.DataLayer
             Teams = new List<Team>();
             Positions = new List<Position>();
             Players = new List<Player>();
+
+
+
+        }
+
+        public List<Player> GetAllPlayersOnAllTeams()
+        {
+            List<Player> Players = new List<Player>();
+            using (SqlConnection cn = new SqlConnection(Settings.ConnectionString))
+            {
+                SqlCommand cmd = new SqlCommand();
+                cmd.CommandText = "select p.PlayerID, p.PlayerName, p.JerseyNumber, p.BattingAverage," +
+                                   "p.YearsPlayed, ps.PositionName, t.TeamName,t.Manager,l.LeagueName" +
+                                   "from Players p " +
+                                   "inner join Positions ps " +
+                                   "on p.PositionID = ps.PositionID " +
+                                   "inner join Teams t" +
+                                   "on p.TeamID = t.TeamID " +
+                                   "inner join Leagues l " +
+                                   "on l.LeagueID = t.LeagueID ";
+                cmd.Connection = cn;
+                cn.Open();
+
+                using (SqlDataReader dr = cmd.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        Players.Add(PopulatePlayerFromDataReader(dr));
+                    }
+                }
+            }
+
+            return Players;
+        }
+
+
+        //gets a list of Players By The Team name 
+        public List<Player> GetPlayersByTeamName(string teamName)
+        {
+            List<Player> Players = new List<Player>();
+
+
+            using (var cn = new SqlConnection(Settings.ConnectionString))
+            {
+                var cmd = new SqlCommand();
+                cmd.CommandText = "GetPlayersByTeamName";
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Connection = cn;
+                cmd.Parameters.AddWithValue("@TeamName", teamName);
+
+                cn.Open();
+
+                using (SqlDataReader dr = cmd.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        Players.Add(PopulatePlayerFromDataReader(dr));
+                    }
+                }
+            }
+
+            return Players;
+        }
+
+
+
+        private Player PopulatePlayerFromDataReader(SqlDataReader dr)
+        {
+            var player = new Player();
+
+            player.PlayerID = (int)dr["PlayerID"];
+            player.Name = dr["PlayerName"].ToString();
+            player.Team.Name = dr["TeamName"].ToString();
+            player.Team.Manager = dr["Manager"].ToString();
+            player.Team.League.Name = dr["LeagueName"].ToString();
+            player.JerseyNumber = (int)dr["JerseyNumber"];
+            player.BattingAverage = (decimal)dr["BattingAverage"];
+            player.YearsPlayed = (int)dr["StudioName"];
+
+            return player;
         }
     }
 }

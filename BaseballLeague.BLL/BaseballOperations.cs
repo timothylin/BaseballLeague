@@ -17,5 +17,20 @@ namespace BaseballLeague.BLL
         {
             _response = new Response();
         }
+
+        public Response GetPlayersByTeamName(string teamName)
+        {
+            List<Player> players = _repo.GetPlayersByTeamName(teamName);
+            _response = new Response();
+
+            if (players != null)
+            {
+                _response.Success = true;
+                _response.Players = players;
+            }
+
+            return _response;
+
+        }
     }
 }
