@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{078FDE18-0E3E-4979-8D02-BF774C3A7B93}</ProjectGuid>
+    <ProjectGuid>{7CBC3E7D-9C70-443C-B74D-6EBA2A72D2D2}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>BaseballLeagues.Tests</RootNamespace>
-    <AssemblyName>BaseballLeagues.Tests</AssemblyName>
+    <RootNamespace>BaseballLeague.Tests</RootNamespace>
+    <AssemblyName>BaseballLeague.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -30,6 +30,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="nunit.framework, Version=3.0.5797.27534, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\NUnit.3.0.0\lib\net45\nunit.framework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -40,16 +44,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaseballOperationTests.cs" />
+    <Compile Include="BaseballRepositoryTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BaseballLeagues.BLL\BaseballLeagues.BLL.csproj">
-      <Project>{78169cdc-0e6a-4027-b7b1-3b2f545c164c}</Project>
-      <Name>BaseballLeagues.BLL</Name>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BaseballLeague.BLL\BaseballLeague.BLL.csproj">
+      <Project>{2fdf5108-6d12-451a-a179-a779be57c7a7}</Project>
+      <Name>BaseballLeague.BLL</Name>
     </ProjectReference>
-    <ProjectReference Include="..\BaseballLeagues.DataLayer\BaseballLeagues.DataLayer.csproj">
-      <Project>{f096bfbb-5ed7-4e97-8c03-1a0a3cd89a21}</Project>
-      <Name>BaseballLeagues.DataLayer</Name>
+    <ProjectReference Include="..\BaseballLeague.DataLayer\BaseballLeague.DataLayer.csproj">
+      <Project>{fd5390ff-d789-4f86-8fde-136243a6e584}</Project>
+      <Name>BaseballLeague.DataLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BaseballLeague.Models\BaseballLeague.Models.csproj">
+      <Project>{ee2555fe-21cc-47a8-a2e1-bd81be9ddd37}</Project>
+      <Name>BaseballLeague.Models</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

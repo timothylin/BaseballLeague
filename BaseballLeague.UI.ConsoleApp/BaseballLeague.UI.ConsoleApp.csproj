@@ -4,15 +4,17 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{F096BFBB-5ED7-4E97-8C03-1A0A3CD89A21}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <ProjectGuid>{13B4F824-C6E8-4BC0-A589-783AD8D4C6A9}</ProjectGuid>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>BaseballLeagues.DataLayer</RootNamespace>
-    <AssemblyName>BaseballLeagues.DataLayer</AssemblyName>
+    <RootNamespace>BaseballLeague.UI.ConsoleApp</RootNamespace>
+    <AssemblyName>BaseballLeague.UI.ConsoleApp</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -22,6 +24,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -40,9 +43,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BaseballLeague.BLL\BaseballLeague.BLL.csproj">
+      <Project>{2fdf5108-6d12-451a-a179-a779be57c7a7}</Project>
+      <Name>BaseballLeague.BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BaseballLeague.DataLayer\BaseballLeague.DataLayer.csproj">
+      <Project>{fd5390ff-d789-4f86-8fde-136243a6e584}</Project>
+      <Name>BaseballLeague.DataLayer</Name>
+    </ProjectReference>
     <ProjectReference Include="..\BaseballLeague.Models\BaseballLeague.Models.csproj">
       <Project>{ee2555fe-21cc-47a8-a2e1-bd81be9ddd37}</Project>
       <Name>BaseballLeague.Models</Name>
