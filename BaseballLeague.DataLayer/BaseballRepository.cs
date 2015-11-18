@@ -26,14 +26,11 @@ namespace BaseballLeague.DataLayer
             Teams = new List<Team>();
             Positions = new List<Position>();
             Players = new List<Player>();
-
-
-
         }
 
         public List<Player> GetAllPlayersOnAllTeams()
         {
-            List<Player> Players = new List<Player>();
+            Players = new List<Player>();
             using (SqlConnection cn = new SqlConnection(Settings.ConnectionString))
             {
                 SqlCommand cmd = new SqlCommand();
@@ -65,7 +62,7 @@ namespace BaseballLeague.DataLayer
         //gets a list of Players By The Team name 
         public List<Player> GetPlayersByTeamName(string teamName)
         {
-            List<Player> Players = new List<Player>();
+            Players = new List<Player>();
 
 
             using (var cn = new SqlConnection(Settings.ConnectionString))
