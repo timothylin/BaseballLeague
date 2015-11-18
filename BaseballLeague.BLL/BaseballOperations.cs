@@ -28,9 +28,7 @@ namespace BaseballLeague.BLL
                 _response.Success = true;
                 _response.Players = players;
             }
-
             return _response;
-
         }
 
 
