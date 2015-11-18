@@ -1,4 +1,5 @@
 ﻿using System;
+using System.CodeDom;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -92,9 +93,38 @@ namespace BaseballLeague.DataLayer
         }
 
 
+        //for testing creating a method to check if player table is updated and then setup methods for response on bll 
+
+        public Player GetPlayerByID( int playerID)
+        {
+            var player = new Player();
+
+            using (SqlConnection cn = new SqlConnection(Settings.ConnectionString))
+            {
+               SqlCommand cmd = new SqlCommand();
+                cmd.CommandText = "select * " +
+                                  "from Players p " +
+                                  "where p.PlayerID = @playerID";
+                cmd.Connection = cn;
+                cmd.Parameters.AddWithValue("@playerID", playerID);
+
+                cn.Open();
+
+                using (SqlDataReader dr = cmd.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        player = PopulatePlayerFromDataReader(dr);
+                    }
+                }               
+            }
+
+            return player;
+        }
 
 
-        public void CreatePlayer(Player player)
+
+        public Player CreatePlayer(Player player)
         {
 
             using (SqlConnection cn = new SqlConnection(Settings.ConnectionString))
@@ -111,18 +141,17 @@ namespace BaseballLeague.DataLayer
                 p.Add("PlayerID", DbType.Int32, direction: ParameterDirection.Output);
                 cn.Execute("InsertPlayer", p, commandType: CommandType.StoredProcedure);
 
-                // var playerID = p.Get<int>("PlayerID");
+                var playerID = p.Get<int>("PlayerID");
 
-                cn.Open();
-                cn.Close();
 
+                return GetPlayerByID(playerID);
             }
-
+         
         }
 
 
 
-        public void RemovePlayer(int playerID)
+        public Player RemovePlayer(int playerID)
         {
             using (SqlConnection cn = new SqlConnection(Settings.ConnectionString))
             {
@@ -139,6 +168,7 @@ namespace BaseballLeague.DataLayer
 
             }
 
+            return GetPlayerByID(playerID);
         }
 
 
@@ -155,7 +185,7 @@ namespace BaseballLeague.DataLayer
             player.Team.League.Name = dr["LeagueName"].ToString();
             player.JerseyNumber = (int)dr["JerseyNumber"];
             player.BattingAverage = (decimal)dr["BattingAverage"];
-            player.YearsPlayed = (int)dr["StudioName"];
+            player.YearsPlayed = (int)dr["YearsPlayed"];
 
             return player;
         }

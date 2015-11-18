@@ -32,5 +32,60 @@ namespace BaseballLeague.BLL
             return _response;
 
         }
+
+
+        public Response GetPlayerByID(int playerID)
+        {
+            var player = _repo.GetPlayerByID(playerID);
+            _response = new Response();
+
+            if (player != null)
+            {
+                _response.Success = true;
+                _response.Player = player;
+
+            }
+
+            return _response;
+        }
+
+
+        public Response CreatePlayer(Player p)
+        {
+            var player = _repo.CreatePlayer(p);
+
+            _response = new Response();
+
+            if (player != null)
+            {
+                _response.Success = true;
+                _response.Player = player;
+            }
+
+            return _response;
+        }
+
+        public Response RemovePlayerByID(int playerID)
+        {
+            var player = _repo.RemovePlayer(playerID);
+
+            _response = new Response();
+
+            if (player == null)
+            {
+                _response.Success = true;
+
+            }
+            else
+            {
+                _response.Success = false;
+            }
+
+            return _response;
+
+        }
+
+
+
     }
 }
