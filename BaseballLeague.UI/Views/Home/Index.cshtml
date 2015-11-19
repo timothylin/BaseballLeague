@@ -1,15 +1,13 @@
-﻿@model System.Collections.Generic.List<BaseballLeague.UI.Models.LeagueVM>
+﻿@model List<BaseballLeague.Models.League>
 
 @{
     ViewBag.Title = "Index";
 }
 
 <h2>Index</h2>
-
 <div class="row">
-
     @foreach (var league in Model)
     {
-        
+        @league.LeagueName
     }
 </div>
