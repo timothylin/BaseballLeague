@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 using BaseballLeague.DataLayer.Config;
@@ -219,27 +220,6 @@ namespace BaseballLeague.DataLayer
             return GetPlayerByID(player.PlayerID);
         }
 
-
-        private Player PopulatePlayerFromDataReader(SqlDataReader dr)
-        {
-            var player = new Player();
-
-            player.PlayerID = (int)dr["PlayerID"];
-            player.PlayerName = dr["PlayerName"].ToString();
-            player.Team.TeamID = (int)dr["TeamID"];
-            player.Team.TeamName = dr["TeamName"].ToString();
-            player.Team.Manager = dr["Manager"].ToString();
-            player.Team.League.LeagueID = (int)dr["LeagueID"];
-            player.Team.League.LeagueName = dr["LeagueName"].ToString();
-            player.Position.PositionID = (int)dr["PositionID"];
-            player.Position.PositionName = dr["PositionName"].ToString();
-            player.JerseyNumber = (int)dr["JerseyNumber"];
-            player.BattingAverage = (decimal)dr["BattingAverage"];
-            player.YearsPlayed = (int)dr["YearsPlayed"];
-
-            return player;
-        }
-
         public Team AddTeam(Team team)
         {
             using (SqlConnection cn = new SqlConnection(Settings.ConnectionString))
@@ -303,6 +283,36 @@ namespace BaseballLeague.DataLayer
             }
 
             return team;
+        }
+
+        public List<Position> GetAllPositions()
+        {
+            using (SqlConnection cn = new SqlConnection(Settings.ConnectionString))
+            {
+                Positions = cn.Query<Position>("Select * from Positions").ToList();
+            }
+
+            return Positions;
+        }
+
+        private Player PopulatePlayerFromDataReader(SqlDataReader dr)
+        {
+            var player = new Player();
+
+            player.PlayerID = (int)dr["PlayerID"];
+            player.PlayerName = dr["PlayerName"].ToString();
+            player.Team.TeamID = (int)dr["TeamID"];
+            player.Team.TeamName = dr["TeamName"].ToString();
+            player.Team.Manager = dr["Manager"].ToString();
+            player.Team.League.LeagueID = (int)dr["LeagueID"];
+            player.Team.League.LeagueName = dr["LeagueName"].ToString();
+            player.Position.PositionID = (int)dr["PositionID"];
+            player.Position.PositionName = dr["PositionName"].ToString();
+            player.JerseyNumber = (int)dr["JerseyNumber"];
+            player.BattingAverage = (decimal)dr["BattingAverage"];
+            player.YearsPlayed = (int)dr["YearsPlayed"];
+
+            return player;
         }
 
         private Team PopulateTeamInfoFromDataReader(SqlDataReader dr)

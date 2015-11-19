@@ -138,5 +138,19 @@ namespace BaseballLeague.BLL
 
             return _response;
         }
+
+        public Response GetAllPositions()
+        {
+            _response = new Response();
+            var positions = _repo.GetAllPositions();
+
+            if (positions != null)
+            {
+                _response.Success = true;
+                _response.Positions = positions;
+            }
+
+            return _response;
+        }
     }
 }
