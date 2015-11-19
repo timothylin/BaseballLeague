@@ -921,11 +921,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-<<<<<<< HEAD
-=======
     <Folder Include="Views\Player\" />
     <Folder Include="Views\Team\" />
->>>>>>> 6a1ebbdbcdc456daf3fe1972e5cb4a4bb9af9ae0
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BaseballLeague.BLL\BaseballLeague.BLL.csproj">
