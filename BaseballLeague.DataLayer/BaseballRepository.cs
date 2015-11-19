@@ -245,36 +245,17 @@ namespace BaseballLeague.DataLayer
         {
             Team team = new Team();
 
-            using (var cn = new SqlConnection(Settings.ConnectionString))
+            using (SqlConnection cn = new SqlConnection(Settings.ConnectionString))
             {
-                var cmd = new SqlCommand();
-                cmd.CommandText = "select t.TeamID, t.TeamName, t.Manager, t.LeagueID, " +
-                                  "p.PlayerID, p.PlayerName, p.JerseyNumber, p.PositionID, p.BattingAverage, p.YearsPlayed, p.TeamID " +
-                                  "l.LeagueName, " +
-                                  "pos.PositionID, pos.PositionName " +
-                                  "from Teams t " +
-                                  "join Players p " +
-                                  "on t.TeamID = p.TeamID " +
-                                  "join Leagues l " +
-                                  "on t.LeagueID = l.LeagueID " +
-                                  "join Positions pos " +
-                                  "on pos.PositionID = p.PositionID " +
-                                  "where t.TeamID = @TeamID ";
-                cmd.Connection = cn;
-                cmd.Parameters.AddWithValue("@TeamID", teamID);
+                var p = new DynamicParameters();
+                p.Add("@TeamID", teamID);
+                
 
-                cn.Open();
-
-                using (SqlDataReader dr = cmd.ExecuteReader())
-                {
-                    while (dr.Read())
-                    {
-                        team = PopulateTeamInfoFromDataReader(dr);
-                    }
-                }
+                team = cn.Query<Team>("GetTeamByID", p, commandType: CommandType.StoredProcedure).FirstOrDefault();
             }
 
-            return team;
+           return team;
+        
         }
 
         public List<Position> GetAllPositions()
