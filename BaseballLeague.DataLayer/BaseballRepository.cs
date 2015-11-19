@@ -206,7 +206,82 @@ namespace BaseballLeague.DataLayer
             return player;
         }
 
+        public Team AddTeam(Team team)
+        {
+            using (SqlConnection cn = new SqlConnection(Settings.ConnectionString))
+            {
+                var pnsm = new DynamicParameters();
+                pnsm.Add("@TeamName", team.TeamName);
+                pnsm.Add("@Manager", team.Manager);
+                pnsm.Add("@LeagueID", team.League.LeagueID)
+                    ;
+                pnsm.Add("@TeamID", DbType.Int32, direction: ParameterDirection.Output);
+                //TODO: Need to make stored procedure, going over them with randall today.
+                cn.Execute("InsertTeams", pnsm, commandType: CommandType.StoredProcedure);
 
+                var teamID = pnsm.Get<int>("TeamID");
 
+                foreach (var player in team.Players)
+                {
+                    var pma = new DynamicParameters();
+
+                    pma.Add("@TeamID", teamID);
+                    pma.Add("@PlayerID", player.PlayerID);
+                    //TODO: need to make stored procedure, going over them with Randall today.
+                    cn.Execute("InsertTeamPlayers", pma, commandType: CommandType.StoredProcedure);
+                }
+
+                return GetTeamByID(teamID);
+            }
+        }
+
+        public Team GetTeamByID(int teamID)
+        {
+            Team team = new Team();
+
+            using (var cn = new SqlConnection(Settings.ConnectionString))
+            {
+                var cmd = new SqlCommand();
+                cmd.CommandText = "select t.TeamID, t.TeamName, t.Manager, t.LeagueID, " +
+                                  "p.PlayerID, p.PlayerName, p.JerseyNumber, p.PositionID, p.BattingAverage, p.YearsPlayed, p.TeamID " +
+                                  "l.LeagueName, " +
+                                  "pos.PositionID, pos.PositionName " +
+                                  "from Teams t " +
+                                  "join Players p " +
+                                  "on t.TeamID = p.TeamID " +
+                                  "join Leagues l " +
+                                  "on t.LeagueID = l.LeagueID " +
+                                  "join Positions pos " +
+                                  "on pos.PositionID = p.PositionID " +
+                                  "where t.TeamID = @TeamID ";
+                cmd.Connection = cn;
+                cmd.Parameters.AddWithValue("@TeamID", teamID);
+
+                cn.Open();
+
+                using (SqlDataReader dr = cmd.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        team = PopulateTeamInfoFromDataReader(dr);
+                    }
+                }
+            }
+
+            return team;
+        }
+
+        private Team PopulateTeamInfoFromDataReader(SqlDataReader dr)
+        {
+            var team = new Team();
+
+            team.TeamID = (int)dr["TeamID"];
+            team.TeamName = dr["TeamName"].ToString();
+            team.Manager = dr["Manager"].ToString();
+            team.League.LeagueID = (int)dr["LeagueID"];
+
+            return team;
+        }
     }
 }
+

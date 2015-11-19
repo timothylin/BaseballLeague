@@ -101,6 +101,42 @@ namespace BaseballLeague.BLL
 
         }
 
+        public Response AddTeam(Team teamToAdd)
+        {
+            _response = new Response();
 
+            var team = _repo.AddTeam(teamToAdd);
+
+            if (team != null)
+            {
+                _response.Success = true;
+                _response.Team = team;
+            }
+            else
+            {
+                _response.Success = false;
+            }
+
+            return _response;
+        }
+
+        public Response GetTeamByID(int teamID)
+        {
+            _response = new Response();
+
+            var team = _repo.GetTeamByID(teamID);
+
+            if (team != null)
+            {
+                _response.Success = true;
+                _response.Team = team;
+            }
+            else
+            {
+                _response.Success = false;
+            }
+
+            return _response;
+        }
     }
 }
