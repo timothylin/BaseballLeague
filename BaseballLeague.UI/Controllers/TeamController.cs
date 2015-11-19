@@ -3,16 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using BaseballLeague.BLL;
 
 namespace BaseballLeague.UI.Controllers
 {
-    public class HomeController : Controller
+    public class TeamController : Controller
     {
-        // GET: Home
+        // GET: Team
         public ActionResult Index()
         {
-
             return View();
         }
     }

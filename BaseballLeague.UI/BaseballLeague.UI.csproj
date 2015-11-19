@@ -894,10 +894,12 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PlayerController.cs" />
+    <Compile Include="Controllers\TeamController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AddPlayerViewModel.cs" />
+    <Compile Include="Models\TeamVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -919,6 +921,11 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+<<<<<<< HEAD
+=======
+    <Folder Include="Views\Player\" />
+    <Folder Include="Views\Team\" />
+>>>>>>> 6a1ebbdbcdc456daf3fe1972e5cb4a4bb9af9ae0
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BaseballLeague.BLL\BaseballLeague.BLL.csproj">

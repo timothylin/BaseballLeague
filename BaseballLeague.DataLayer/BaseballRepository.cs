@@ -230,59 +230,32 @@ namespace BaseballLeague.DataLayer
                 pnsm.Add("@LeagueID", team.League.LeagueID)
                     ;
                 pnsm.Add("@TeamID", DbType.Int32, direction: ParameterDirection.Output);
-                //TODO: Need to make stored procedure, going over them with randall today.
+                
                 cn.Execute("InsertTeams", pnsm, commandType: CommandType.StoredProcedure);
 
                 var teamID = pnsm.Get<int>("TeamID");
-
-                foreach (var player in team.Players)
-                {
-                    var pma = new DynamicParameters();
-
-                    pma.Add("@TeamID", teamID);
-                    pma.Add("@PlayerID", player.PlayerID);
-                    //TODO: need to make stored procedure, going over them with Randall today.
-                    cn.Execute("InsertTeamPlayers", pma, commandType: CommandType.StoredProcedure);
-                }
 
                 return GetTeamByID(teamID);
             }
         }
 
+
+
         public Team GetTeamByID(int teamID)
         {
             Team team = new Team();
 
-            using (var cn = new SqlConnection(Settings.ConnectionString))
+            using (SqlConnection cn = new SqlConnection(Settings.ConnectionString))
             {
-                var cmd = new SqlCommand();
-                cmd.CommandText = "select t.TeamID, t.TeamName, t.Manager, t.LeagueID, " +
-                                  "p.PlayerID, p.PlayerName, p.JerseyNumber, p.PositionID, p.BattingAverage, p.YearsPlayed, p.TeamID " +
-                                  "l.LeagueName, " +
-                                  "pos.PositionID, pos.PositionName " +
-                                  "from Teams t " +
-                                  "join Players p " +
-                                  "on t.TeamID = p.TeamID " +
-                                  "join Leagues l " +
-                                  "on t.LeagueID = l.LeagueID " +
-                                  "join Positions pos " +
-                                  "on pos.PositionID = p.PositionID " +
-                                  "where t.TeamID = @TeamID ";
-                cmd.Connection = cn;
-                cmd.Parameters.AddWithValue("@TeamID", teamID);
+                var p = new DynamicParameters();
+                p.Add("@TeamID", teamID);
+                
 
-                cn.Open();
-
-                using (SqlDataReader dr = cmd.ExecuteReader())
-                {
-                    while (dr.Read())
-                    {
-                        team = PopulateTeamInfoFromDataReader(dr);
-                    }
-                }
+                team = cn.Query<Team>("GetTeamByID", p, commandType: CommandType.StoredProcedure).FirstOrDefault();
             }
 
-            return team;
+           return team;
+        
         }
 
         public List<Position> GetAllPositions()
