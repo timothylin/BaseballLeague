@@ -152,5 +152,13 @@ namespace BaseballLeague.BLL
 
             return _response;
         }
+
+        public Response GetAllLeagues()
+        {
+            _response = new Response();
+            var leagues = _repo.GetAllLeagues();
+
+            return _response;
+        }
     }
 }

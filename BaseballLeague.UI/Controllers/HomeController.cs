@@ -12,8 +12,10 @@ namespace BaseballLeague.UI.Controllers
         // GET: Home
         public ActionResult Index()
         {
+            var ops = new BaseballOperations();
+            var leagues = ops.GetAllLeagues();
 
-            return View();
+            return View(leagues);
         }
     }
 }
