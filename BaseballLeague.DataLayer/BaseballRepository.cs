@@ -18,7 +18,7 @@ namespace BaseballLeague.DataLayer
 
         public static List<League> Leagues { get; set; }
         public static List<Team> Teams { get; set; }
-        public static List<Position> Positions { get; set; }   
+        public static List<Position> Positions { get; set; }
         public static List<Player> Players { get; set; }
 
         public BaseballRepository()
@@ -51,10 +51,10 @@ namespace BaseballLeague.DataLayer
 
             return Players;
         }
-        
+
         //gets a list of Players By The Team name 
-        public List<Player> GetPlayersByTeamName(string teamName)
-        { 
+        public List<Player> GetPlayersByTeamName(int teamID)
+        {
             Players = new List<Player>();
 
             using (var cn = new SqlConnection(Settings.ConnectionString))
@@ -64,7 +64,7 @@ namespace BaseballLeague.DataLayer
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 cmd.Connection = cn;
-                cmd.Parameters.AddWithValue("@TeamName", teamName);
+                cmd.Parameters.AddWithValue("@TeamID", teamID);
 
                 cn.Open();
 
@@ -83,16 +83,25 @@ namespace BaseballLeague.DataLayer
 
         //for testing creating a method to check if player table is updated and then setup methods for response on bll 
 
-        public Player GetPlayerByID( int playerID)
+        public Player GetPlayerByID(int playerID)
         {
             var player = new Player();
 
             using (SqlConnection cn = new SqlConnection(Settings.ConnectionString))
             {
-               SqlCommand cmd = new SqlCommand();
-                cmd.CommandText = "select * " +
+                SqlCommand cmd = new SqlCommand();
+                cmd.CommandText = "select p.PlayerID, p.PlayerName, p.TeamID, t.TeamName, t.Manager, " +
+                                  "l.LeagueID, l.LeagueName, p.PositionID, ps.PositionName, p.JerseyNumber, " +
+                                  "p.BattingAverage, p.YearsPlayed " +
                                   "from Players p " +
+                                  "inner join Positions ps " +
+                                  "on p.PositionID = ps.PositionID " +
+                                  "inner join Teams t " +
+                                  "on p.TeamID = t.TeamID " +
+                                  "inner join Leagues l " +
+                                  "on t.LeagueID = l.LeagueID " +
                                   "where p.PlayerID = @playerID";
+
                 cmd.Connection = cn;
                 cmd.Parameters.AddWithValue("@playerID", playerID);
 
@@ -104,7 +113,7 @@ namespace BaseballLeague.DataLayer
                     {
                         player = PopulatePlayerFromDataReader(dr);
                     }
-                }               
+                }
             }
 
             return player;
@@ -119,7 +128,7 @@ namespace BaseballLeague.DataLayer
             {
                 var p = new DynamicParameters();
 
-                p.Add("@PlayerName", player.Name);
+                p.Add("@PlayerName", player.PlayerName);
                 p.Add("@JerseyNumber", player.JerseyNumber);
                 p.Add("@PositionID", player.Position.PositionID);
                 p.Add("@BattingAverage", player.BattingAverage);
@@ -133,9 +142,9 @@ namespace BaseballLeague.DataLayer
 
 
                 return GetPlayerByID(playerID);
-               
+
             }
-         
+
         }
 
 
@@ -162,8 +171,19 @@ namespace BaseballLeague.DataLayer
 
 
 
+        public Player TradePlayer(Player player, int newTeamID)
+        {
+            using (SqlConnection cn = new SqlConnection(Settings.ConnectionString))
+            {
+                var p = new DynamicParameters();
+                p.Add("@TeamID", newTeamID);
+                p.Add("@PlayerID", player.PlayerID);
 
+                cn.Execute("TradePlayer", p, commandType: CommandType.StoredProcedure);
+            }
 
+            return GetPlayerByID(player.PlayerID);
+        }
 
 
         private Player PopulatePlayerFromDataReader(SqlDataReader dr)
@@ -171,10 +191,14 @@ namespace BaseballLeague.DataLayer
             var player = new Player();
 
             player.PlayerID = (int)dr["PlayerID"];
-            player.Name = dr["PlayerName"].ToString();
-            player.Team.Name = dr["TeamName"].ToString();
+            player.PlayerName = dr["PlayerName"].ToString();
+            player.Team.TeamID = (int)dr["TeamID"];
+            player.Team.TeamName = dr["TeamName"].ToString();
             player.Team.Manager = dr["Manager"].ToString();
-            player.Team.League.Name = dr["LeagueName"].ToString();
+            player.Team.League.LeagueID = (int)dr["LeagueID"];
+            player.Team.League.LeagueName = dr["LeagueName"].ToString();
+            player.Position.PositionID = (int)dr["PositionID"];
+            player.Position.PositionName = dr["PositionName"].ToString();
             player.JerseyNumber = (int)dr["JerseyNumber"];
             player.BattingAverage = (decimal)dr["BattingAverage"];
             player.YearsPlayed = (int)dr["YearsPlayed"];

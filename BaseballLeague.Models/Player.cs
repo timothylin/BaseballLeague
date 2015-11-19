@@ -12,7 +12,7 @@ namespace BaseballLeague.Models
         public Position Position { get; set; }
         public Team Team { get; set; }
         public int JerseyNumber { get; set; }
-        public string Name { get; set; }
+        public string PlayerName { get; set; }
         public decimal BattingAverage { get; set; }
         public int YearsPlayed { get; set; }
 

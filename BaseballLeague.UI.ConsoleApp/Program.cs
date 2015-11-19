@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BaseballLeague.BLL;
 using BaseballLeague.DataLayer;
 using BaseballLeague.Models;
 
@@ -16,7 +17,19 @@ namespace BaseballLeague.UI.ConsoleApp
 
             //RemovePlayer(15);
 
-           // Console.ReadLine();
+            // Console.ReadLine();
+
+            //var repo = new BaseballRepository();
+
+            //var players = repo.GetAllPlayersOnAllTeams();
+
+            //foreach (var player in players)
+            //{
+            //    Console.WriteLine(player.PlayerName);
+            //}
+
+
+            //Console.ReadLine();
 
 
         }

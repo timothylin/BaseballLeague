@@ -11,7 +11,7 @@ namespace BaseballLeague.Models
         public int TeamID { get; set; }
         public League League { get; set; }
         public string Manager { get; set; }
-        public string Name { get; set; }
+        public string TeamName { get; set; }
         public List<Player> Players { get; set; }
 
         public Team()
