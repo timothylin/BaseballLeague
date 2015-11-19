@@ -54,7 +54,6 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml.Linq" />
@@ -898,6 +897,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\AddPlayerViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -908,6 +908,8 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Scripts\jquery-2.1.4.min.map" />
     <Content Include="Scripts\version.json" />
+    <Content Include="Views\Player\AddPlayer.cshtml" />
+    <Content Include="Views\Player\PlayerDetails.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -917,8 +919,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
-    <Folder Include="Views\Player\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BaseballLeague.BLL\BaseballLeague.BLL.csproj">

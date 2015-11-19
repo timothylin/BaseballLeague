@@ -18,6 +18,38 @@ namespace BaseballLeague.BLL
             _response = new Response();
         }
 
+
+        public Response GetAllTeams()
+        {        
+            _response = new Response();
+            _response.Teams = _repo.GetAllTeams();
+
+            if (_response.Teams != null)
+            {
+                _response.Success = true;
+               
+            }
+
+            return _response;
+        }
+
+
+        public Response GetAllLeagues()
+        {
+            _response = new Response();
+            _response.Leagues = _repo.GetAllLeagues();
+
+            if (_response.Leagues != null)
+            {
+                _response.Success = true;
+
+            }
+
+            return _response;
+
+        }
+
+
         public Response GetPlayersByTeamName(int teamID)
         {
             List<Player> players = _repo.GetPlayersByTeamName(teamID);
