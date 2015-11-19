@@ -29,6 +29,38 @@ namespace BaseballLeague.DataLayer
             Players = new List<Player>();
         }
 
+
+
+        public List<League> GetAllLeagues()
+        {
+            //List<League> leagues = new List<League>();
+
+            using (SqlConnection cn = new SqlConnection(Settings.ConnectionString))
+            {
+                 Leagues = cn.Query<League>("GetALLLeagues",
+                   commandType: CommandType.StoredProcedure).ToList();
+
+             
+            }
+
+            return Leagues;
+        }
+
+
+        public List<Team> GetAllTeams()
+        {
+            using (SqlConnection cn = new SqlConnection(Settings.ConnectionString))
+            {
+                Teams = cn.Query<Team>("GetAllTeams", commandType: CommandType.StoredProcedure).ToList();
+            }
+
+            return Teams;
+        } 
+
+
+
+
+
         public List<Player> GetAllPlayersOnAllTeams()
         {
             Players = new List<Player>();

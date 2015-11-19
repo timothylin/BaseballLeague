@@ -29,6 +29,10 @@ namespace BaseballLeague.UI.ConsoleApp
             //}
 
 
+            //GetAllLeagues();
+
+            //GetAllTeams();
+
             //Console.ReadLine();
 
 
@@ -63,6 +67,30 @@ namespace BaseballLeague.UI.ConsoleApp
         //}
 
 
+        //public static void GetAllLeagues()
+        //{
+        //    BaseballRepository repo = new BaseballRepository();
+
+        //    var leagues = repo.GetAllLeagues();
+
+        //    foreach (var l in leagues)
+        //    {
+        //        Console.WriteLine("{0}: {1}", l.LeagueID, l.LeagueName);
+        //    }
+        //}
+
+
+        //public static void GetAllTeams()
+        //{
+        //    BaseballRepository repo = new BaseballRepository();
+
+        //    var teams = repo.GetAllTeams();
+
+        //    foreach (var t in teams)
+        //    {
+        //        Console.WriteLine("{0}: {1} , {2}, {3}", t.TeamID, t.TeamName, t.Manager, t.League.LeagueName);
+        //    }
+        //}
 
 
     }
