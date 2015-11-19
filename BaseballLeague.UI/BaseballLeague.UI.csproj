@@ -895,10 +895,11 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PlayerController.cs" />
+    <Compile Include="Controllers\TeamController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\LeagueVM.cs" />
+    <Compile Include="Models\TeamVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -918,8 +919,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
     <Folder Include="Views\Player\" />
+    <Folder Include="Views\Team\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BaseballLeague.BLL\BaseballLeague.BLL.csproj">
