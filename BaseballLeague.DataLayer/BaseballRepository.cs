@@ -218,24 +218,16 @@ namespace BaseballLeague.DataLayer
                 pnsm.Add("@LeagueID", team.League.LeagueID)
                     ;
                 pnsm.Add("@TeamID", DbType.Int32, direction: ParameterDirection.Output);
-                //TODO: Need to make stored procedure, going over them with randall today.
+                
                 cn.Execute("InsertTeams", pnsm, commandType: CommandType.StoredProcedure);
 
                 var teamID = pnsm.Get<int>("TeamID");
 
-                foreach (var player in team.Players)
-                {
-                    var pma = new DynamicParameters();
-
-                    pma.Add("@TeamID", teamID);
-                    pma.Add("@PlayerID", player.PlayerID);
-                    //TODO: need to make stored procedure, going over them with Randall today.
-                    cn.Execute("InsertTeamPlayers", pma, commandType: CommandType.StoredProcedure);
-                }
-
                 return GetTeamByID(teamID);
             }
         }
+
+
 
         public Team GetTeamByID(int teamID)
         {
