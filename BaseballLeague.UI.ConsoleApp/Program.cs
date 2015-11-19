@@ -29,6 +29,16 @@ namespace BaseballLeague.UI.ConsoleApp
             //}
 
 
+            //var ops = new BaseballOperations();
+
+            //var response = ops.GetAllPositions();
+
+            //foreach (var position in response.Positions)
+            //{
+            //    Console.WriteLine(position.PositionID);
+            //    Console.WriteLine(position.PositionName);
+            //}
+
             //Console.ReadLine();
 
 
