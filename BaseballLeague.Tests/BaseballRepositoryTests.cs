@@ -113,5 +113,26 @@ namespace BaseballLeague.Tests
             Assert.AreEqual(20, result.TeamID);
         }
 
+
+        [Test]
+        public void GetTeamByID()
+        {
+            var result = repo.GetTeamByID(20);
+
+            Assert.AreEqual("CloudRiders", result.TeamName);
+        }
+
+
+        [Test]
+        public void GetAllPositions()
+        {
+            List<Position> positions = repo.GetAllPositions();
+
+            Assert.AreEqual("Catcher", positions.FirstOrDefault(m=> m.PositionName == "Catcher").PositionName);
+        }
+
+
+
+
     }
 }
