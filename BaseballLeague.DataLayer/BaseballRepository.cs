@@ -273,6 +273,7 @@ namespace BaseballLeague.DataLayer
         public League GetTeamsByLeagueID(int leagueID)
         {
             League league = new League();
+            Teams = new List<Team>();
 
             using (SqlConnection cn = new SqlConnection(Settings.ConnectionString))
             {
@@ -290,6 +291,16 @@ namespace BaseballLeague.DataLayer
                     while (dr.Read())
                     {
                         league = PopulateLeagueInfoFromReader(dr);
+
+                        Team team = new Team();
+                        team.TeamID = (int)dr["TeamID"];
+                        team.League.LeagueID = (int)dr["leagueID"];
+                        team.League.LeagueName = dr["leagueName"].ToString();
+                        team.Manager = dr["Manager"].ToString();
+                        team.TeamName = dr["TeamName"].ToString();
+
+                        Teams.Add(team);
+                        league.Teams = Teams;
                     }
                 }
             }
@@ -299,16 +310,9 @@ namespace BaseballLeague.DataLayer
 
         private League PopulateLeagueInfoFromReader(SqlDataReader dr)
         {
-
             League league = new League();
             league.LeagueID = (int)dr["leagueID"];
             league.LeagueName = dr["leagueName"].ToString();
-            List<Team> teams = new List<Team>();
-            while (dr.Read())
-            {
-                teams.Add(PopulateTeamInfoFromDataReader(dr));
-                league.Teams = teams;
-            }
 
             return league;
         }
