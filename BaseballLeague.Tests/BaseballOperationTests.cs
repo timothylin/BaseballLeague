@@ -8,5 +8,6 @@ namespace BaseballLeague.Tests
 {
     public class BaseballOperationTests
     {
+
     }
 }

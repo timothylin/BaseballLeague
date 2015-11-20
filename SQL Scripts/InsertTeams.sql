@@ -9,16 +9,16 @@ SET QUOTED_IDENTIFIER ON
 GO
 
 
-ALTER PROCEDURE [dbo].[InsertTeams] (
-@TeamID int,
+Alter PROCEDURE [dbo].[InsertTeams] (
 @TeamName varchar (50),
 @Manager varchar(50),
-@LeagueID int output
+@LeagueID int,
+@TeamID int Output
 ) as
 begin
 
-insert into Teams(TeamID, TeamName, Manager, LeagueID)
-values (@TeamID, @TeamName, @Manager, @LeagueID)
+insert into Teams(TeamName, Manager, LeagueID)
+values (@TeamName, @Manager, @LeagueID)
 
 set @TeamID = SCOPE_IDENTITY();
 
