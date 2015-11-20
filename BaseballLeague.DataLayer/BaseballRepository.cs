@@ -238,20 +238,20 @@ namespace BaseballLeague.DataLayer
         }
 
 
-        public League GetTeamsByLeagueID(int leagueID)
-        {
-            League league = new League();
+        //public League GetTeamsByLeagueID(int leagueID)
+        //{
+        //    League league = new League();
 
-            using (SqlConnection cn = new SqlConnection(Settings.ConnectionString))
-            {
-                var p = new DynamicParameters();
-                p.Add("@LeagueID", leagueID);
+        //    using (SqlConnection cn = new SqlConnection(Settings.ConnectionString))
+        //    {
+        //        var p = new DynamicParameters();
+        //        p.Add("@LeagueID", leagueID);
 
-                league = cn.Query<League>("GetTeamsByLeagueID", p, commandType: CommandType.StoredProcedure).FirstOrDefault();
-            }
+        //        league = cn.Query<League>("GetTeamsByLeagueID", p, commandType: CommandType.StoredProcedure).FirstOrDefault();
+        //    }
 
-            return league;
-        }
+        //    return league;
+        //}
 
         public Team GetTeamByID(int teamID)
         {
@@ -270,7 +270,7 @@ namespace BaseballLeague.DataLayer
 
         }
 
-        public League GetTeamByLeagueID(int leagueID)
+        public League GetTeamsByLeagueID(int leagueID)
         {
             League league = new League();
 
