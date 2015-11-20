@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using BaseballLeague.BLL;
+using BaseballLeague.Models;
 using BaseballLeague.UI.Models;
 
 namespace BaseballLeague.UI.Controllers
@@ -21,14 +22,19 @@ namespace BaseballLeague.UI.Controllers
             return View("Index",response.Teams);
         }
 
-        //public ActionResult AddTeam(int id)
-        //{
-        //    var ops = new BaseballOperations();
-        //    AddPlayerViewModel teams = new AddPlayerViewModel();
+        //******************************************************************
 
-        //    //var response = ops.AddTeam(id);
-        //    return View();
-        //}
+        public ActionResult AddTeam()
+        {
+            BaseballOperations ops = new BaseballOperations();
+
+            TeamVM tvm = new TeamVM();
+
+            var response = ops.GetAllLeagues();
+            tvm.CreateLeagueList(response.Leagues);
+            
+            return View(tvm);
+        }
 
         //[HttpPost]
         //public ActionResult AddTeam
