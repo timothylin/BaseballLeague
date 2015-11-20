@@ -84,7 +84,5 @@ namespace BaseballLeague.Tests
             Assert.AreEqual(expected, actual);
         }
 
-        //[TestCase(1)]
-        //public void GetPlayerByIDTest()
     }
 }
