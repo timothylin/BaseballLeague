@@ -8,59 +8,56 @@
 <div>
     <div class="row">
         <div class="col-md-6">
-            <br />
+            <br/>
             @using (Html.BeginForm("AddPlayer", "Player", FormMethod.Post))
             {
                 <div class="container">
                     <div class="row">
                         <div class="col-md-6 form-group">
                             <h6> Player Name</h6>
-                            <p>@Html.TextBoxFor(m => m.player.PlayerName, null, new { style = "width: " })</p>
+                            <p>@Html.TextBoxFor(m => m.player.PlayerName, null, new {style = "width: "})</p>
                         </div>
                         <div class="col-md-6 form-group">
                             <h6> Jersey Number</h6>
-                            <p>@Html.TextBoxFor(m => m.player.JerseyNumber, null, new { style = "width: " })</p>
+                            <p>@Html.TextBoxFor(m => m.player.JerseyNumber, null, new {style = "width: "})</p>
                         </div>
                         <div class="col-md-6 form-group">
                             <h6> Batting Average</h6>
-                            <p>@Html.TextBoxFor(m => m.player.BattingAverage, null, new { style = "width: " })</p>
+                            <p>@Html.TextBoxFor(m => m.player.BattingAverage, null, new {style = "width: "})</p>
                         </div>
                         <div class="col-md-6 form-group">
                             <h6> Years Played</h6>
-                            <p>@Html.TextBoxFor(m => m.player.YearsPlayed, null, new { style = "width: " })</p>
+                            <p>@Html.TextBoxFor(m => m.player.YearsPlayed, null, new {style = "width: "})</p>
                         </div>
+
+
 
                         <div class="row">
-                            <div class="col-md-6">
-                                <h6> Player Name</h6>
-                                <p>@Html.TextBoxFor(m => m.player.PlayerName, new { style = "width: 100%" })</p>
+                            <div class="col-md-6 form-group">
+                                <h6> Position ID </h6>
+                                <p> @Html.DropDownListFor(m => m.player.Position.PositionID, Model.PositionList, "Choose a position", new {style = "width: 100%", @class = "form-control"})</p>
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <h6> Team ID </h6>
+                                <p> @Html.DropDownListFor(m => m.player.Team.TeamID, Model.TeamList, "Choose a Team", new {style = "width: 100%", @class = "form-control"})</p>
                             </div>
 
-                            <div class="row">
-                                <div class="col-md-6 form-group">
-                                    <h6> Position ID </h6>
-                                    <p> @Html.DropDownListFor(m => m.player.Position.PositionID, Model.PositionList, "Choose a position", new { style = "width: 100%", @class = "form-control" })</p>
-                                </div>
-                                <div class="col-md-6 form-group">
-                                    <h6> Team ID </h6>
-                                    <p> @Html.DropDownListFor(m => m.player.Team.TeamID, Model.TeamList, "Choose a Team", new { style = "width: 100%", @class = "form-control" })</p>
-                                </div>
+                        </div>
 
+
+
+
+
+
+                        <div>
+                            <br/>
+                            <br/>
+
+                            <div class="col-center-block">
+                                <button class="btn btn-danger"> Add Player</button>
                             </div>
 
-
-
-
-
-
                         </div>
-                        <br />
-                        <br />
-
-                        <div class="col-center-block">
-                            <button class="btn btn-danger"> Add Player</button>
-                        </div>
-
                     </div>
                 </div>
 
