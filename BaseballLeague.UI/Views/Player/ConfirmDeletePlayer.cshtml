@@ -1,0 +1,17 @@
+﻿@model BaseballLeague.Models.Player
+@{
+    ViewBag.Title = "ConfirmDeletePlayer";
+}
+
+<h2>Confirm Delete Player</h2>
+
+<h2 class="padding-top-40">That player has been Deleted.</h2>
+<div class="container">
+    <div class="col-lg-5 col-md-5 col-sm-12 col-center-block">
+        @using (Html.BeginForm("Index", "Home", null, FormMethod.Post))
+        {
+            <button id="cancel" class="btn btn-primary">Main Menu</button>
+        }
+    </div>
+</div>
+

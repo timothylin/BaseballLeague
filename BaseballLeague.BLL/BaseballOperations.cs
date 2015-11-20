@@ -215,5 +215,23 @@ namespace BaseballLeague.BLL
 
             return _response;
         }
+
+        public Response GetTeamsByLeagueID(int leagueID)
+        {
+            _response = new Response();
+            var leagueTeams = _repo.GetTeamsByLeagueID(leagueID);
+
+            if (leagueTeams != null)
+            {
+                _response.Success = true;
+                _response.League = leagueTeams;
+            }
+            else
+            {
+                _response.Success = false;
+            }
+
+            return _response;
+        }
     }
 }

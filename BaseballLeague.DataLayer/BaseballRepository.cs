@@ -236,24 +236,22 @@ namespace BaseballLeague.DataLayer
                 return GetTeamByID(teamID);
             }
         }
-        //NOT IN REQUIREMENTS
-        //public League AddLeague(League league)
-        //{
-        //    using (SqlConnection cn = new SqlConnection(Settings.ConnectionString))
-        //    {
-        //        var pnsm = new DynamicParameters();
-        //        pnsm.Add("@LeagueName", league.LeagueName);
-        //      //  pnsm.Add("@LeagueID", league.LeagueID);
-        //        pnsm.Add("@LeagueID", DbType.Int32, direction: ParameterDirection.Output);
 
-        //        cn.Execute("InsertLeague", pnsm, commandType: CommandType.StoredProcedure);
 
-        //       // var leagueID = pnsm.Get<int>("LeagueID");
+        public League GetTeamsByLeagueID(int leagueID)
+        {
+            League league = new League();
 
-        //        return GetLeagueByID(leagueID);
-        //    }
-        //}
+            using (SqlConnection cn = new SqlConnection(Settings.ConnectionString))
+            {
+                var p = new DynamicParameters();
+                p.Add("@LeagueID", leagueID);
 
+                league = cn.Query<League>("GetTeamsByLeagueID", p, commandType: CommandType.StoredProcedure).FirstOrDefault();
+            }
+
+            return league;
+        }
 
         public Team GetTeamByID(int teamID)
         {
@@ -263,13 +261,53 @@ namespace BaseballLeague.DataLayer
             {
                 var p = new DynamicParameters();
                 p.Add("@TeamID", teamID);
-                
+
 
                 team = cn.Query<Team>("GetTeamByID", p, commandType: CommandType.StoredProcedure).FirstOrDefault();
             }
 
-           return team;
-        
+            return team;
+
+        }
+
+        public League GetTeamByLeagueID(int leagueID)
+        {
+            League league = new League();
+
+            using (SqlConnection cn = new SqlConnection(Settings.ConnectionString))
+            {
+                var cmd = new SqlCommand();
+                cmd.CommandText = "GetTeamsByLeagueID";
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Connection = cn;
+                cmd.Parameters.AddWithValue("@LeagueID", leagueID);
+
+                cn.Open();
+
+                using (SqlDataReader dr = cmd.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        league = PopulateLeagueInfoFromReader(dr);
+                    }
+                }
+            }
+
+            return league;
+        }
+
+        private League PopulateLeagueInfoFromReader(SqlDataReader dr)
+        {
+
+            League league = new League();
+            league.LeagueID = (int)dr["leagueID"];
+            league.LeagueName = dr["leagueName"].ToString();
+            List<Team> teams = new List<Team>();
+            teams.Add(PopulateTeamInfoFromDataReader(dr));
+            league.Teams = teams;
+
+            return league;
         }
 
         public List<Position> GetAllPositions()
@@ -313,6 +351,24 @@ namespace BaseballLeague.DataLayer
 
             return team;
         }
+
+        //NOT IN REQUIREMENTS
+        //public League AddLeague(League league)
+        //{
+        //    using (SqlConnection cn = new SqlConnection(Settings.ConnectionString))
+        //    {
+        //        var pnsm = new DynamicParameters();
+        //        pnsm.Add("@LeagueName", league.LeagueName);
+        //      //  pnsm.Add("@LeagueID", league.LeagueID);
+        //        pnsm.Add("@LeagueID", DbType.Int32, direction: ParameterDirection.Output);
+
+        //        cn.Execute("InsertLeague", pnsm, commandType: CommandType.StoredProcedure);
+
+        //       // var leagueID = pnsm.Get<int>("LeagueID");
+
+        //        return GetLeagueByID(leagueID);
+        //    }
+        //}
     }
 }
 
