@@ -25,6 +25,13 @@ namespace BaseballLeague.UI.Controllers
             return View("Index", response.Leagues);
         }
 
+        [HttpPost]
+        public ActionResult TeamsInSpecificLeagueResult(int leagueID)
+        {
+            var ops = new BaseballOperations();
+            var teamsInLeague = ops.GetTeamsByLeagueID(leagueID);
 
+            return View("LeagueTeams", teamsInLeague.League);
+        }
     }
 }

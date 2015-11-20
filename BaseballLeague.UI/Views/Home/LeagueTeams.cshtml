@@ -1,0 +1,16 @@
+﻿@model BaseballLeague.Models.League
+
+@{
+    ViewBag.Title = "LeagueTeams";
+}
+
+<h2>LeagueTeams</h2>
+<h1>SOMETHING SHOW UP DEAR GOD</h1>
+@foreach (var team in Model.Teams)
+{
+    
+    <p>      
+@team.TeamID.ToString();
+    </p>
+}
+

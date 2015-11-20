@@ -9,7 +9,7 @@
     @foreach (var league in Model)
     {
         <div class="col-md-3">
-            @using (Html.BeginForm("", "Home", null, FormMethod.Post))
+            @using (Html.BeginForm("TeamsInSpecificLeagueResult", "Home", null, FormMethod.Post))
             {
                 @Html.Hidden("leagueID", @league.LeagueID)
                 <button id="details" class="btn btn-danger btn-block">@league.LeagueName</button>

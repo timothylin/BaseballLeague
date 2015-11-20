@@ -239,7 +239,20 @@ namespace BaseballLeague.DataLayer
             }
         }
 
+        public League GetTeamsByLeagueID(int leagueID)
+        {
+            League league = new League();
 
+            using (SqlConnection cn = new SqlConnection(Settings.ConnectionString))
+            {
+                var p = new DynamicParameters();
+                p.Add("@LeagueID", leagueID);
+
+                league = cn.Query<League>("GetTeamsByLeagueID", p, commandType: CommandType.StoredProcedure).FirstOrDefault();
+            }
+
+            return league;
+        }
 
         public Team GetTeamByID(int teamID)
         {
@@ -249,13 +262,53 @@ namespace BaseballLeague.DataLayer
             {
                 var p = new DynamicParameters();
                 p.Add("@TeamID", teamID);
-                
+
 
                 team = cn.Query<Team>("GetTeamByID", p, commandType: CommandType.StoredProcedure).FirstOrDefault();
             }
 
-           return team;
-        
+            return team;
+
+        }
+
+        public League GetTeamByLeagueID(int leagueID)
+        {
+            League league = new League();
+
+            using (SqlConnection cn = new SqlConnection(Settings.ConnectionString))
+            {
+                var cmd = new SqlCommand();
+                cmd.CommandText = "GetTeamsByLeagueID";
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Connection = cn;
+                cmd.Parameters.AddWithValue("@LeagueID", leagueID);
+
+                cn.Open();
+
+                using (SqlDataReader dr = cmd.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        league = PopulateLeagueInfoFromReader(dr);
+                    }
+                }
+            }
+
+            return league;
+        }
+
+        private League PopulateLeagueInfoFromReader(SqlDataReader dr)
+        {
+
+            League league = new League();
+            league.LeagueID = (int)dr["leagueID"];
+            league.LeagueName = dr["leagueName"].ToString();
+            List<Team> teams = new List<Team>();
+            teams.Add(PopulateTeamInfoFromDataReader(dr));
+            league.Teams = teams;
+
+            return league;
         }
 
         public List<Position> GetAllPositions()
