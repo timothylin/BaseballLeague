@@ -32,8 +32,8 @@
                                     <p>@team.Manager</p>
                                 </div>
                                 @*<div class="col-sm-1 margin-top-35 hidden-sm hidden-xs">
-                                    <p>@team.TeamID</p>
-                                </div>*@
+                                        <p>@team.TeamID</p>
+                                    </div>*@
 
                                 @*//Button to go to a list of players for the team clicked*@
                                 <div class="col-md-4 col-xs-12">
@@ -44,9 +44,10 @@
                                             <button id="details" class="btn btn-danger btn-block">Players</button>
                                         }
                                     </div>
-                                    
-                                  
+
+
                                 </div>
+
                             </div>
                         </div>
                     </div>
@@ -54,4 +55,14 @@
             </li>
         }
     </ul>
+
+    <div class="col-md-4 col-xs-12">
+        <div class="col-xs-6">
+            @using (Html.BeginForm("AddPlayer", "Player", null, FormMethod.Post))
+            {
+                @*@Html.Hidden("TeamID", Model.)*@
+                <button id="details" class="btn btn-danger btn-block">Add Player</button>
+            }
+        </div>
+    </div>
 </div>
