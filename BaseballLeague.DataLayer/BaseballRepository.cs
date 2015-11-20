@@ -38,8 +38,8 @@ namespace BaseballLeague.DataLayer
 
             using (SqlConnection cn = new SqlConnection(Settings.ConnectionString))
             {
-                 Leagues = cn.Query<League>("GetALLLeagues",
-                   commandType: CommandType.StoredProcedure).ToList();
+                Leagues = cn.Query<League>("GetALLLeagues",
+                  commandType: CommandType.StoredProcedure).ToList();
             }
 
             return Leagues;
@@ -54,7 +54,7 @@ namespace BaseballLeague.DataLayer
             }
 
             return Teams;
-        } 
+        }
 
 
 
@@ -228,7 +228,7 @@ namespace BaseballLeague.DataLayer
                 pnsm.Add("@LeagueID", team.League.LeagueID)
                     ;
                 pnsm.Add("@TeamID", DbType.Int32, direction: ParameterDirection.Output);
-                
+
                 cn.Execute("InsertTeams", pnsm, commandType: CommandType.StoredProcedure);
 
                 var teamID = pnsm.Get<int>("TeamID");
@@ -304,8 +304,11 @@ namespace BaseballLeague.DataLayer
             league.LeagueID = (int)dr["leagueID"];
             league.LeagueName = dr["leagueName"].ToString();
             List<Team> teams = new List<Team>();
-            teams.Add(PopulateTeamInfoFromDataReader(dr));
-            league.Teams = teams;
+            while (dr.Read())
+            {
+                teams.Add(PopulateTeamInfoFromDataReader(dr));
+                league.Teams = teams;
+            }
 
             return league;
         }

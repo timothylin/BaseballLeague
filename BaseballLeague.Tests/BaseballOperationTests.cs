@@ -116,7 +116,14 @@ namespace BaseballLeague.Tests
         [Test]
         public void GetAllPlayersOnAllTeams()
         {
-            
+            int count = 0;
+
+            using (SqlConnection cn = new SqlConnection(Settings.ConnectionString))
+            {
+                count = (int) cn.ExecuteScalar("select count(*) from players");
+            }
+
+            Assert.AreEqual(count, _ops.GetAllPlayerOnAllTeams().Players.Count());
         }
 
     }
