@@ -9,8 +9,6 @@ namespace BaseballLeague.UI.Models
 {
     public class AddPlayerViewModel
     {
-
-        
         public List<SelectListItem> TeamList { get; set; }  
         public List<SelectListItem> PositionList { get; set; } 
 

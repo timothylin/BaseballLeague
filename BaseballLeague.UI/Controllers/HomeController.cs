@@ -16,7 +16,7 @@ namespace BaseballLeague.UI.Controllers
         public ActionResult Index()
         {
             var ops = new BaseballOperations();
-            var response = ops.GetAllLeaguez();
+            var response = ops.GetAllLeagues();
             
             //var leagueVM = new LeagueVM();
 

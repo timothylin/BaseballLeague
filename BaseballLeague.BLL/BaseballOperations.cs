@@ -184,19 +184,5 @@ namespace BaseballLeague.BLL
 
             return _response;
         }
-
-        public Response GetAllLeaguez()
-        {
-            _response = new Response();
-            var leagues = _repo.GetAllLeagues();
-
-            if (leagues != null)
-            {
-                _response.Success = true;
-                _response.Leagues = leagues;
-            }
-
-            return _response;
-        }
     }
 }
