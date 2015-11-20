@@ -84,5 +84,40 @@ namespace BaseballLeague.Tests
             Assert.AreEqual(expected, actual);
         }
 
+        [Test]
+        public void CreatePlayerTest()
+        {
+            Player player = new Player();
+
+            player.PlayerName = "Raiden";
+            player.JerseyNumber = 55;
+            player.Position.PositionID = 7;
+            player.BattingAverage = 0.29m;
+            player.YearsPlayed = 20;
+            player.Team.TeamID = 2;
+
+
+            Assert.AreEqual(true, _ops.CreatePlayer(player).Success);
+        }
+
+        [Test]
+        public void RemovePlayerByIDTest()
+        {
+            int playerID = 0;
+
+            using (SqlConnection cn = new SqlConnection(Settings.ConnectionString))
+            {
+                playerID = (int)cn.ExecuteScalar("select count(*) from Players");
+            }
+
+            Assert.AreEqual(true, _ops.RemovePlayerByID(playerID).Success);
+        }
+
+        [Test]
+        public void GetAllPlayersOnAllTeams()
+        {
+            
+        }
+
     }
 }

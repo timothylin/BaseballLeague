@@ -101,7 +101,7 @@ namespace BaseballLeague.BLL
 
             _response = new Response();
 
-            if (player == null)
+            if (player.PlayerID == 0)
             {
                 _response.Success = true;
 
