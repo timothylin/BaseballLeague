@@ -25,6 +25,7 @@ namespace BaseballLeague.UI.Controllers
             return View("Index", response.Leagues);
         }
 
+
         [HttpPost]
         public ActionResult TeamsInSpecificLeagueResult(int leagueID)
         {
@@ -33,5 +34,15 @@ namespace BaseballLeague.UI.Controllers
 
             return View("LeagueTeams", teamsInLeague.League);
         }
+
+        //NOT IN REQUIREMENTS
+        //[HttpPost]
+        //public ActionResult CreateLeagueForm()
+        //{
+        //    var ops = new BaseballOperations();
+        //    var response = ops.
+        //    return View();
+
+        //}
     }
 }

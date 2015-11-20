@@ -17,16 +17,16 @@
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="row">
             <div class="col-md-6">
-                <p>@Html.LabelFor(m => m.team.TeamName)</p>
-                <p>@Html.TextBoxFor(m => m.team.TeamName, new {style = "width:100%", placeholder = "Bulls"})</p>
+                <p>@Html.LabelFor(m => m.Team.TeamName)</p>
+                <p>@Html.TextBoxFor(m => m.Team.TeamName, new {style = "width:100%", placeholder = "Bulls"})</p>
             </div>
             <div class="col-md-6">
-                <p>@Html.LabelFor(m => m.team.Manager)</p>
-                <p>@Html.TextBoxFor(m => m.team.Manager, new {style = "width:100%", placeholder = "Manager"})</p>
+                <p>@Html.LabelFor(m => m.Team.Manager)</p>
+                <p>@Html.TextBoxFor(m => m.Team.Manager, new {style = "width:100%", placeholder = "Manager"})</p>
             </div>
             <div class="col-md-6">
-                <p>@Html.LabelFor(m => m.team.League.LeagueName)</p>
-                <p>@Html.TextBoxFor(m => m.team.League.LeagueName, new {style = "width:100%", placeholder = "League"})</p>
+                <p>@Html.LabelFor(m => m.Team.League.LeagueName)</p>
+                <p>@Html.TextBoxFor(m => m.Team.League.LeagueName, new {style = "width:100%", placeholder = "League"})</p>
             </div>
         </div>
         <div class="form-group">

@@ -40,8 +40,6 @@ namespace BaseballLeague.DataLayer
             {
                  Leagues = cn.Query<League>("GetALLLeagues",
                    commandType: CommandType.StoredProcedure).ToList();
-
-             
             }
 
             return Leagues;
@@ -239,6 +237,7 @@ namespace BaseballLeague.DataLayer
             }
         }
 
+
         public League GetTeamsByLeagueID(int leagueID)
         {
             League league = new League();
@@ -352,6 +351,24 @@ namespace BaseballLeague.DataLayer
 
             return team;
         }
+
+        //NOT IN REQUIREMENTS
+        //public League AddLeague(League league)
+        //{
+        //    using (SqlConnection cn = new SqlConnection(Settings.ConnectionString))
+        //    {
+        //        var pnsm = new DynamicParameters();
+        //        pnsm.Add("@LeagueName", league.LeagueName);
+        //      //  pnsm.Add("@LeagueID", league.LeagueID);
+        //        pnsm.Add("@LeagueID", DbType.Int32, direction: ParameterDirection.Output);
+
+        //        cn.Execute("InsertLeague", pnsm, commandType: CommandType.StoredProcedure);
+
+        //       // var leagueID = pnsm.Get<int>("LeagueID");
+
+        //        return GetLeagueByID(leagueID);
+        //    }
+        //}
     }
 }
 
