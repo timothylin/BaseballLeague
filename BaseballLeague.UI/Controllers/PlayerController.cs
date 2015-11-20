@@ -12,6 +12,18 @@ namespace BaseballLeague.UI.Controllers
 {
     public class PlayerController : Controller
     {
+        //Lara added -- goes to list of players page
+        public ActionResult Index(int teamID)
+        {
+            BaseballOperations ops = new BaseballOperations();
+            AddPlayerViewModel teams = new AddPlayerViewModel();
+
+            var response = ops.GetPlayersByTeamName(teamID);
+
+            return View("Index", response.Players);
+        }
+
+
         // GET: Player
         public ActionResult AddPlayer()
         {

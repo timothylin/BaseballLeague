@@ -921,6 +921,8 @@
     <Content Include="Views\Player\AddPlayer.cshtml" />
     <Content Include="Views\Player\PlayerDetails.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Team\Index.cshtml" />
+    <Content Include="Views\Player\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -930,10 +932,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-
-    <Folder Include="Views\Player\" />
-
-    <Folder Include="Views\Team\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BaseballLeague.BLL\BaseballLeague.BLL.csproj">

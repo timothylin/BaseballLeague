@@ -15,7 +15,6 @@ namespace BaseballLeague.UI.Controllers
         // GET: Home
         public ActionResult Index()
         {
-
             var ops = new BaseballOperations();
             var response = ops.GetAllLeaguez();
             

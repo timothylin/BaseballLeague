@@ -1,0 +1,57 @@
+﻿@model List<BaseballLeague.Models.Team>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<div class="container">
+    <h2 class="padding-top-20 margin-left-10">All Teams</h2>
+    <div class="container">
+        <div class="row hidden-sm hidden-xs">
+            <div class="col-sm-3 margin-left-50"><h6>Team Name</h6></div>
+            <div class="col-sm-2"><h6>Manager Name</h6></div>
+            @*<div class="col-sm-2 margin-left-50"><h6>MPAA Rating</h6></div>*@
+        </div>
+    </div>
+    <ul class="list">
+        @foreach (var team in Model)
+        {
+            <li class="list-no-style">
+                <div class="no-container">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+
+                            <div class="row margin-top-10">
+
+                                <div class="col-sm-3 margin-top-35 margin-left-10 hidden-sm hidden-xs">
+                                    <p>@team.TeamName</p>
+                                </div>
+                                <div class="col-sm-3 margin-top-35 hidden-sm hidden-xs">
+                                    <p>@team.Manager</p>
+                                </div>
+                                @*<div class="col-sm-1 margin-top-35 hidden-sm hidden-xs">
+                                    <p>@team.TeamID</p>
+                                </div>*@
+
+                                @*//Button to go to a list of players for the team clicked*@
+                                <div class="col-md-4 col-xs-12">
+                                    <div class="col-xs-6">
+                                        @using (Html.BeginForm("Index", "Player", null, FormMethod.Post))
+                                        {
+                                            @Html.Hidden("TeamID", team.TeamID)
+                                            <button id="details" class="btn btn-danger btn-block">Players</button>
+                                        }
+                                    </div>
+                                    
+                                  
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        }
+    </ul>
+</div>
