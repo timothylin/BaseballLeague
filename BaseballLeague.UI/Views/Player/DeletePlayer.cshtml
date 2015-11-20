@@ -1,0 +1,78 @@
+﻿@model BaseballLeague.Models.Player
+@{
+    ViewBag.Title = "DeletePlayer";
+}
+
+<h2>Delete Player</h2>
+
+<div class="container">
+    <div class="col-lg-5 col-md-5 col-sm-12 col-center-block">
+        <h2 class="padding-top-20">@Model.PlayerName</h2>
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-xs-4">
+                        <h6>Player ID</h6>
+                        <p>@Model.PlayerID</p>
+                    </div>
+                    <div class="col-xs-4">
+                        <h6>Jersey Number</h6>
+                        <p>@Model.JerseyNumber</p>
+                    </div>
+                    <div class="col-xs-4">
+                        <h6>Position</h6>
+                        <p>@Model.Position.PositionName</p>
+                    </div>
+                    <div class="col-xs-4">
+                        <h6>Batting Average</h6>
+                        <p>@Model.BattingAverage</p>
+                    </div>
+                    <div class="col-xs-4">
+                        <h6>Years Played</h6>
+                        <p>@Model.YearsPlayed</p>
+                    </div>
+                    <div class="col-xs-4">
+                        <h6>Team Name</h6>
+                        <p>@Model.Team.TeamName</p>
+                    </div>
+                   
+
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="row">
+    <div class="col-md-offset-4 col-md-2 col-xs-12">
+        <p>Are you sure you want to Delete this entry?</p>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-offset-4 col-md-2 col-xs-12">
+        <div class="col-xs-6">
+            @using (Html.BeginForm("ConfirmDeletePlayer", "Player", null, FormMethod.Post))
+            {
+                @Html.Hidden("playerID", Model.PlayerID)
+                <button id="deletePlayer" class="btn btn-danger">Confirm</button>
+            }
+        </div>
+        <div class="col-xs-6">
+            @using (Html.BeginForm("Index", "Home", null, FormMethod.Post))
+            {
+                <button id="cancel" class="btn btn-primary">Cancel</button>
+            }
+
+        </div>
+    </div>
+</div>
+<br />
+<br />
+
+
+
