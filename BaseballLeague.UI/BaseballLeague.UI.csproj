@@ -924,6 +924,8 @@
     <Content Include="Views\Player\Index.cshtml" />
     <Content Include="Views\Team\AddTeam.cshtml" />
     <Content Include="Views\Home\LeagueTeams.cshtml" />
+    <Content Include="Views\Player\DeletePlayer.cshtml" />
+    <Content Include="Views\Player\ConfirmDeletePlayer.cshtml" />
     <Content Include="Views\Home\CreateLeagueForm.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

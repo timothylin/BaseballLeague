@@ -12,6 +12,8 @@ namespace BaseballLeague.UI.Controllers
 {
     public class PlayerController : Controller
     {
+        public object BaseballOperat { get; private set; }
+
         //Lara added -- goes to list of players page
         public ActionResult Index(int teamID)
         {
@@ -65,6 +67,36 @@ namespace BaseballLeague.UI.Controllers
             }
         }
 
+
+        //public ActionResult DeletePlayer(int playerid)
+        //{
+        //    var ops = new BaseballOperations();
+        //    var player = ops.GetPlayerByID(playerid);
+
+        //    return View("Remove", player.)
+        //}
+
+
+        public ActionResult DeletePlayer(int playerid)
+        {
+            var ops = new BaseballOperations();
+
+            var playerResponse = ops.GetPlayerByID(playerid);
+
+            return View("DeletePlayer", playerResponse.Player);
+        }
+
+
+        [HttpPost]
+        public ActionResult ConfirmDeletePlayer(int playerid)
+        {
+            var ops = new BaseballOperations();
+
+            ops.RemovePlayerByID(playerid);
+            var playerResponse = ops.GetPlayerByID(playerid);
+
+            return View("ConfirmDeletePlayer", playerResponse.Player);
+        }
 
 
 
