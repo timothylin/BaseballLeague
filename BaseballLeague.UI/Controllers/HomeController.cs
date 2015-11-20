@@ -24,5 +24,7 @@ namespace BaseballLeague.UI.Controllers
 
             return View("Index", response.Leagues);
         }
+
+
     }
 }

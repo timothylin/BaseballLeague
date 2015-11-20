@@ -8,9 +8,15 @@
 <div class="row">
     @foreach (var league in Model)
     {
-        @league.LeagueName
+        <div class="col-md-3">
+            @using (Html.BeginForm("", "Home", null, FormMethod.Post))
+            {
+                @Html.Hidden("leagueID", @league.LeagueID)
+                <button id="details" class="btn btn-danger btn-block">@league.LeagueName</button>
+            }
+            
+        </div>
 
-       
     }
     @*//click to create a new League*@
     <div class="col-md-4 col-xs-12">
