@@ -115,6 +115,21 @@ namespace BaseballLeague.BLL
 
         }
 
+        public Response GetAllPlayerOnAllTeams()
+        {
+            var players = _repo.GetAllPlayersOnAllTeams();
+
+            _response = new Response();
+
+            if (players != null)
+            {
+                _response.Success = true;
+                _response.Players = players;
+            }
+
+            return _response;
+        }
+
         public Response TradePlayer(int playerID, int newTeamID)
         {
             var players = _repo.GetAllPlayersOnAllTeams();

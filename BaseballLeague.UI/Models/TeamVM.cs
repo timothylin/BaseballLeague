@@ -10,7 +10,7 @@ namespace BaseballLeague.UI.Models
     public class TeamVM
     {
         public List<SelectListItem> LeagueList { get; set; }
-        public Team  team { get; set; }
+        public Team Team { get; set; }
 
         public TeamVM()
         {
