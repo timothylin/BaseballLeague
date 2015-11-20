@@ -24,5 +24,15 @@ namespace BaseballLeague.UI.Controllers
 
             return View("Index", response.Leagues);
         }
+
+        //NOT IN REQUIREMENTS
+        //[HttpPost]
+        //public ActionResult CreateLeagueForm()
+        //{
+        //    var ops = new BaseballOperations();
+        //    var response = ops.
+        //    return View();
+
+        //}
     }
 }

@@ -152,6 +152,22 @@ namespace BaseballLeague.BLL
             return _response;
         }
 
+        //NOT IN REQUIREMENTS
+        //public Response AddLeague(League leagueToAdd)
+        //{
+        //    _response = new Response();
+
+        //    var league = _repo.AddLeague(leagueToAdd);
+
+        //    if (league != null)
+        //    {
+        //        _response.Success = true;
+        //        _response.League = league;
+        //    }
+
+        //    return _response;
+        //}
+
         public Response GetTeamByID(int teamID)
         {
             _response = new Response();

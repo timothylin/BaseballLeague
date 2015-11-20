@@ -12,15 +12,17 @@
 
        
     }
-    @*//click to create a new League*@
-    <div class="col-md-4 col-xs-12">
+    @*
+        NOT IN REQUIREMENTS
+        //click to create a new League*@
+    @*<div class="col-md-4 col-xs-12">
         <div class="col-xs-6">
-            @using (Html.BeginForm("Index", "Team", null, FormMethod.Post))
+            @using (Html.BeginForm("CreateLeagueForm", "Home", null, FormMethod.Post))
             {
-                @*@Html.Hidden("leagueID", league.LeagueID)*@
+                @Html.Hidden("leagueID", league.LeagueID)
                 <button id="details" class="btn btn-danger btn-block">Create New League</button>
             }
         </div>
-    </div>
+    </div>*@
 
 </div>
