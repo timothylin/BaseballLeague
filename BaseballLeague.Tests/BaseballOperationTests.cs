@@ -114,17 +114,28 @@ namespace BaseballLeague.Tests
         }
 
         [Test]
-        public void GetAllPlayersOnAllTeams()
+        public void GetAllPlayersOnAllTeamsTest()
         {
             int count = 0;
 
             using (SqlConnection cn = new SqlConnection(Settings.ConnectionString))
             {
-                count = (int) cn.ExecuteScalar("select count(*) from players");
+                count = (int)cn.ExecuteScalar("select count(*) from players");
             }
 
             Assert.AreEqual(count, _ops.GetAllPlayerOnAllTeams().Players.Count());
         }
+
+        [TestCase(1, 5)]
+        [TestCase(2, 3)]
+        [TestCase(3, 1)]
+        public void TradePlayerTests(int playerID, int newTeamID)
+        {
+            _response = _ops.TradePlayer(playerID, newTeamID);
+
+            Assert.AreEqual(true, _response.Success);
+        }
+
 
     }
 }

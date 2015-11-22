@@ -12,18 +12,18 @@ namespace BaseballLeague.Tests
     [TestFixture]
     public class BaseballRepositoryTests
     {
-        private BaseballRepository repo { get; set; }
+        private BaseballRepository _repo { get; set; }
 
         [SetUp]
         public void SetUp()
         {
-            repo = new BaseballRepository();
+            _repo = new BaseballRepository();
         }
 
         [Test]
         public void GetAllLeagues()
         {
-            List<League> leagues = repo.GetAllLeagues();
+            List<League> leagues = _repo.GetAllLeagues();
 
             Assert.AreEqual(1, leagues.FirstOrDefault(m=> m.LeagueID == 1).LeagueID);
         }
@@ -31,7 +31,7 @@ namespace BaseballLeague.Tests
         [Test]
         public void GetAllTeams()
         {
-            List<Team> teams = repo.GetAllTeams();
+            List<Team> teams = _repo.GetAllTeams();
 
             Assert.AreEqual("Bulls", teams.FirstOrDefault(m => m.TeamName == "Bulls").TeamName);
         }
@@ -39,7 +39,7 @@ namespace BaseballLeague.Tests
         [Test]
         public void GetAllPlayersOnAllTeams()
         {
-            List<Player> players = repo.GetAllPlayersOnAllTeams();
+            List<Player> players = _repo.GetAllPlayersOnAllTeams();
 
             Assert.AreEqual(1, players.FirstOrDefault(m => m.PlayerID == 1).PlayerID);
         }
@@ -48,7 +48,7 @@ namespace BaseballLeague.Tests
         [Test]
         public void GetPlayersByTeamName()
         {
-            List<Player> players = repo.GetPlayersByTeamName(1);
+            List<Player> players = _repo.GetPlayersByTeamName(1);
 
             Assert.AreEqual("Smith", players.FirstOrDefault(m => m.PlayerName == "Smith").PlayerName);
         }
@@ -56,7 +56,7 @@ namespace BaseballLeague.Tests
         [Test]
         public void GetPlayerByID()
         {
-            Player player = repo.GetPlayerByID(7);
+            Player player = _repo.GetPlayerByID(7);
 
             Assert.AreEqual("Sleepy", player.PlayerName);
         }
@@ -74,7 +74,7 @@ namespace BaseballLeague.Tests
             player.YearsPlayed = 20;
             player.Team.TeamID = 2;
 
-            var result = repo.CreatePlayer(player);
+            var result = _repo.CreatePlayer(player);
 
             Assert.AreEqual("Raiden", result.PlayerName);
 
@@ -85,7 +85,7 @@ namespace BaseballLeague.Tests
         [Test]
         public void RemovePlayer()
         {
-            var result = repo.RemovePlayer(14);
+            var result = _repo.RemovePlayer(14);
 
             Assert.AreEqual(null, result.PlayerName);
         }
@@ -94,8 +94,7 @@ namespace BaseballLeague.Tests
         [Test]
         public void TradePlayer()
         {
-            var player = repo.GetPlayerByID(17);
-            var result = repo.TradePlayer(player, 3);
+            var result = _repo.TradePlayer(5, 3);
 
             Assert.AreEqual(3, result.Team.TeamID);
         }
@@ -108,7 +107,7 @@ namespace BaseballLeague.Tests
             team.Manager = "Genos";
             team.League.LeagueID = 2;
 
-            var result = repo.AddTeam(team);
+            var result = _repo.AddTeam(team);
 
             Assert.AreEqual(20, result.TeamID);
         }
@@ -117,7 +116,7 @@ namespace BaseballLeague.Tests
         [Test]
         public void GetTeamByID()
         {
-            var result = repo.GetTeamByID(20);
+            var result = _repo.GetTeamByID(20);
 
             Assert.AreEqual("CloudRiders", result.TeamName);
         }
@@ -126,7 +125,7 @@ namespace BaseballLeague.Tests
         [Test]
         public void GetAllPositions()
         {
-            List<Position> positions = repo.GetAllPositions();
+            List<Position> positions = _repo.GetAllPositions();
 
             Assert.AreEqual("Catcher", positions.FirstOrDefault(m=> m.PositionName == "Catcher").PositionName);
         }

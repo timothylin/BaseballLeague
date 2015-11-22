@@ -204,18 +204,18 @@ namespace BaseballLeague.DataLayer
 
 
 
-        public Player TradePlayer(Player player, int newTeamID)
+        public Player TradePlayer(int playerID, int newTeamID)
         {
             using (SqlConnection cn = new SqlConnection(Settings.ConnectionString))
             {
                 var p = new DynamicParameters();
                 p.Add("@TeamID", newTeamID);
-                p.Add("@PlayerID", player.PlayerID);
+                p.Add("@PlayerID", playerID);
 
                 cn.Execute("TradePlayer", p, commandType: CommandType.StoredProcedure);
             }
 
-            return GetPlayerByID(player.PlayerID);
+            return GetPlayerByID(playerID);
         }
 
         public Team AddTeam(Team team)

@@ -136,7 +136,7 @@ namespace BaseballLeague.BLL
             var player = players.FirstOrDefault(p => p.PlayerID == playerID);
             _response = new Response();
 
-            var tradedPlayer = _repo.TradePlayer(player, newTeamID);
+            var tradedPlayer = _repo.TradePlayer(playerID, newTeamID);
 
             if (tradedPlayer.Team.TeamID == newTeamID)
             {
