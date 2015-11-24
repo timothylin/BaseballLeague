@@ -136,6 +136,59 @@ namespace BaseballLeague.Tests
             Assert.AreEqual(true, _response.Success);
         }
 
+        [Test]
+        public void AddTeamTest()
+        {
+            var team = new Team();
+            team.TeamName = "CloudRiders";
+            team.Manager = "Genos";
+            team.League.LeagueID = 2;
+
+            var response = _ops.AddTeam(team);
+
+            Assert.AreEqual(true, response.Success);
+        }
+
+        [TestCase(2)]
+        [TestCase(3)]
+        [TestCase(5)]
+        public void GetTeamByIDTests(int teamID)
+        {
+            var response = _ops.GetTeamByID(teamID);
+
+            Assert.AreEqual(teamID, response.Team.TeamID);
+        }
+
+        [Test]
+        public void GetAllPositionsTest()
+        {
+            var response = _ops.GetAllPositions();
+            List<Position> sqlOutput = new List<Position>();
+
+            using (SqlConnection cn = new SqlConnection(Settings.ConnectionString))
+            {
+                sqlOutput = cn.Query<Position>("select * from Positions").ToList();
+            }
+
+            var actual = _jss.Serialize(response.Positions);
+            var expected = _jss.Serialize(sqlOutput);
+
+            Assert.AreEqual(expected, actual);
+
+        }
+
+        [TestCase(1)]
+        [TestCase(2)]
+        [TestCase(3)]
+        public void GetTeamsByLeagueIDTests(int leagueID)
+        {
+            var response = _ops.GetTeamsByLeagueID(leagueID);
+
+            Assert.AreEqual(true, response.Success);
+
+        }
+
+
 
     }
 }
