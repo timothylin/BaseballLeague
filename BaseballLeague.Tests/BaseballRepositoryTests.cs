@@ -1,10 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Script.Serialization;
 using BaseballLeague.DataLayer;
+using BaseballLeague.DataLayer.Config;
 using BaseballLeague.Models;
+using Dapper;
 using NUnit.Framework;
 
 namespace BaseballLeague.Tests
@@ -13,11 +17,13 @@ namespace BaseballLeague.Tests
     public class BaseballRepositoryTests
     {
         private BaseballRepository _repo { get; set; }
+        private JavaScriptSerializer _jss { get; set; }
 
         [SetUp]
         public void SetUp()
         {
             _repo = new BaseballRepository();
+            _jss = new JavaScriptSerializer();
         }
 
         [Test]
@@ -50,7 +56,15 @@ namespace BaseballLeague.Tests
         {
             List<Player> players = _repo.GetPlayersByTeamName(1);
 
-            Assert.AreEqual("Smith", players.FirstOrDefault(m => m.PlayerName == "Smith").PlayerName);
+            var playersList = _repo.GetAllPlayersOnAllTeams();
+
+            var expectedPlayers = playersList.Where(p => p.Team.TeamID == 1);
+
+            var actual = _jss.Serialize(players);
+
+            var expected = _jss.Serialize(expectedPlayers);
+
+            Assert.AreEqual(expected, actual);
         }
 
         [Test]
@@ -103,22 +117,38 @@ namespace BaseballLeague.Tests
         public void AddTeam()
         {
             var team = new Team();
-            team.TeamName = "CloudRiders";
+            team.TeamName = "Cloud Riders";
             team.Manager = "Genos";
             team.League.LeagueID = 2;
 
             var result = _repo.AddTeam(team);
 
-            Assert.AreEqual(20, result.TeamID);
+            var expectedTeam = _repo.GetTeamByID(
+                result.TeamID);
+
+            var actual = _jss.Serialize(result);
+
+            var expected = _jss.Serialize(expectedTeam);
+
+            Assert.AreEqual(expected, actual);
         }
 
 
         [Test]
         public void GetTeamByID()
         {
-            var result = _repo.GetTeamByID(20);
+            var result = _repo.GetTeamByID(5);
 
-            Assert.AreEqual("CloudRiders", result.TeamName);
+            List<Team> teamsReturned = new List<Team>();
+
+            using (SqlConnection cn = new SqlConnection(Settings.ConnectionString))
+            {
+                teamsReturned = cn.Query<Team>("select * from teams").ToList();
+            }
+
+            var expected = teamsReturned.FirstOrDefault(t => t.TeamID == 5);
+
+            Assert.AreEqual(expected.TeamName, result.TeamName);
         }
 
 
