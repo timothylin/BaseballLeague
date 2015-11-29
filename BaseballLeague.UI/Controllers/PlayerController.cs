@@ -17,12 +17,16 @@ namespace BaseballLeague.UI.Controllers
         //Lara added -- goes to list of players page
         public ActionResult Index(int teamID)
         {
+
+            TeamPlayersVM vm = new TeamPlayersVM();
             BaseballOperations ops = new BaseballOperations();
             AddPlayerViewModel teams = new AddPlayerViewModel();
 
             var response = ops.GetPlayersByTeamName(teamID);
+            vm.TeamName = ops.GetTeamByID(teamID).Team.TeamName;
+            vm.Players = response.Players;
 
-            return View("Index", response.Players);
+            return View(vm);
         }
 
 

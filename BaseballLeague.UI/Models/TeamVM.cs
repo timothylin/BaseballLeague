@@ -7,8 +7,16 @@ using BaseballLeague.Models;
 
 namespace BaseballLeague.UI.Models
 {
+   
+    public class TeamPlayersVM
+    {
+        public string TeamName { get; set; }
+        public List<Player> Players { get; set; }
+
+    }
     public class TeamVM
     {
+
         public List<SelectListItem> LeagueList { get; set; }
         public Team Team { get; set; }
 
