@@ -4,20 +4,32 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>ÌLEAGUESÍ</h2>
+<br />
 <div class="row">
     @foreach (var league in Model)
     {
-        <div class="col-md-3">
-            @using (Html.BeginForm("TeamsInSpecificLeagueResult", "Home", null, FormMethod.Post))
-            {
-                @Html.Hidden("leagueID", @league.LeagueID)
-                <button id="details" class="btn btn-danger btn-block">@league.LeagueName</button>
-            }
-            
+
+        <div class="col-md-3 col-xs-12 ">
+            <div class="thumbnail">
+                <img class="hidden-sm hidden-xs" src="~/Content/img/logo-placeholder.jpg" alt="League Logo">
+                <div class="caption">
+                    <h3 class="hidden-sm hidden-xs">@league.LeagueName</h3>
+                    <p class="hidden-sm hidden-xs">Baseball League description.</p>
+                    <p>
+                        @using (Html.BeginForm("TeamsInSpecificLeagueResult", "Home", null, FormMethod.Post))
+                        {
+                            @Html.Hidden("leagueID", @league.LeagueID)
+                            <button id="details" class="btn btn-primary btn-block">@league.LeagueName</button>
+                        }
+                    </p>
+                </div>
+            </div>
         </div>
 
     }
+</div>
+
     @*
         NOT IN REQUIREMENTS
         //click to create a new League*@

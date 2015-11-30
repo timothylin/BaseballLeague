@@ -4,5 +4,30 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>ÌPLAYERSÍ</h2>
 
+<div class="row">
+    <div class="panel-heading">
+        <table style="width:100%">
+            <tr>
+                <th>Player Name</th>
+                <th>Number</th>
+                <th>Position</th>
+                <th>Years Played</th>
+                <th>Batting Avg.</th>
+            </tr>
+            
+            @foreach (var player in Model)
+            {
+                <tr>
+                    <td>@player.PlayerName</td>
+                    <td>@player.JerseyNumber</td>
+                    <td>@player.Position.PositionName</td>
+                    <td>@player.YearsPlayed</td>
+                    <td>@player.BattingAverage</td>
+
+                </tr>
+            }
+        </table>
+    </div>
+</div>

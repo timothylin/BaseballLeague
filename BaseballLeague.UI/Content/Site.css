@@ -1,6 +1,41 @@
-﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
+﻿
+@font-face {
+    font-family: 'norwesterregular';
+    src: url('../fonts/norwesterFont/norwester-webfont.eot');
+    src: url('../fonts/norwesterFont/norwester-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/norwesterFont/norwester-webfont.woff2') format('woff2'),
+         url('../fonts/norwesterFont/norwester-webfont.woff') format('woff'),
+         url('../fonts/norwesterFont/norwester-webfont.ttf') format('truetype'),
+         url('../fonts/norwesterFont/norwester-webfont.svg') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'yorkwhiteletterregular';
+    src: url('../fonts/yorkwhiteletter/yorkwhiteletter-webfont.eot');
+    src: url('../fonts/yorkwhiteletter/yorkwhiteletter-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/yorkwhiteletter/yorkwhiteletter-webfont.woff2') format('woff2'),
+         url('../fonts/yorkwhiteletter/yorkwhiteletter-webfont.woff') format('woff'),
+         url('../fonts/yorkwhiteletter/yorkwhiteletter-webfont.ttf') format('truetype'),
+         url('../fonts/yorkwhiteletter/yorkwhiteletter-webfont.svg#yorkwhiteletterregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'lobster_1.3regular';
+    src: url('../fonts/lobster/lobster_1.3-webfont.eot');
+    src: url('../fonts/lobster/lobster_1.3-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/lobster/lobster_1.3-webfont.woff2') format('woff2'),
+         url('../fonts/lobster/lobster_1.3-webfont.woff') format('woff'),
+         url('../fonts/lobster/lobster_1.3-webfont.ttf') format('truetype'),
+         url('../fonts/lobster/lobster_1.3-webfont.svg#lobster_1.3regular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -9,10 +44,186 @@
     padding-right: 15px;
 }
 
-/* Set width on the form input elements since they're 100% wide by default */
+
+
+/*-----------------------NAVBAR------------------------*/
+
+.navbar-brand {
+    color:#292929;
+    font-size: 60px;
+    font-family: 'norwesterregular';
+}
+.mobile-brand {
+    color:#292929;
+    font-size: 28px;
+    font-family: 'norwesterregular';
+}
+.navbar-form {
+    max-width: 260px;
+    padding-left: 15px;
+}
+
+@media (min-width: 960px) {
+    .navbar-default {
+           margin: 0px 100px;
+           background-color: #282828 !important;
+    }
+}
+
+.navbar-default {
+   background-color: #282828 !important;
+   border: none;
+   font-family: 'norwesterregular';
+}
+
+.navbar-default .navbar-nav>li>a {
+    color: white;
+}
+.navbar-default .navbar-nav>li>a:hover {
+    color: white;
+    background-color: black; 
+}
+
+/*---------------------------BODY----------------------------*/
+.col-center-block {
+    float: none;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.btn-primary {
+    background-color: #6441a5;
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: #a68ed2;
+    border: none;
+}
+
+body {
+    padding-top: 40px;
+    padding-bottom: 20px;
+    background-color: #efefef;
+}
+html {
+    background-color: #efefef;
+   
+}
+
+.btn-default, .btn-primary, .btn-success, .btn-info, .btn-warning, .btn-danger, .btn-link {
+    border-radius: 0;
+}
+
+/*--------------------------FOOTER---------------------------*/
+
+footer {
+    height: 150px;
+    background-color: #282828;
+    bottom: auto;
+
+}
+
+footer a {
+    color: lightgrey;
+}
+
+#credit {
+    color: white;
+}
+
+
+
+/*-----------------FORMS------------------*/
 input,
 select,
 textarea {
     max-width: 280px;
 }
 
+/*----------------PADDING----------------*/
+
+.padding-top-5 {
+    padding-top: 5px;
+}
+.padding-top-20 {
+    padding-top: 20px;
+}
+.padding-top-40 {
+    padding-top: 40px;
+}
+
+.padding-left-5 {
+    padding-left: 5px;
+}
+.padding-left-20 {
+    padding-left: 20px;
+}
+.padding-left-50 {
+    padding-left: 50px;
+}
+
+/*----------------------MARGIN----------------------*/
+
+.margin-top-10 {
+    margin-top: 10px;
+}
+.margin-top-20 {
+    margin-top: 20px;
+}
+.margin-top-35 {
+    margin-top: 35px;
+}
+
+.margin-left-10 {
+    margin-left: 10px;
+}
+.margin-left-50 {
+    margin-left: 50px;
+}
+
+
+/*---------------------LISTS----------------------*/
+.list-no-style {
+    list-style-type: none;
+}
+
+/*-------------------- TEXT----------------------------*/
+h2, h6 {
+    color: #32323e;
+}
+
+p {
+    color: #626263;
+}
+
+h4 {
+    color: #32323e;
+}
+
+h2{
+    font-size: 60px;
+    text-align: center;
+    font-family: 'yorkwhiteletterregular';
+}
+
+h6 {
+    font-size: 14px;
+}
+
+.alt-h6 {
+    color: white;
+}
+
+.alt-h3 {
+    color: white;
+    font-family: 'norwesterregular';
+}
+
+/*---------------PANELS----------------*/
+.panel-body {
+    background-color: #ffffff;
+    border-radius: 0 !important;
+    -moz-border-radius: 0 !important;
+}

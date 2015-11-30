@@ -1,0 +1,13 @@
+﻿@model List<BaseballLeague.Models.Team>
+
+@section NavTeams 
+{
+    @foreach (var team in Model)
+    {
+        using (Html.BeginForm("Index", "Player", null, FormMethod.Post))
+        {
+            @Html.Hidden("TeamID", team.TeamID)
+            Html.ActionLink(@team.TeamName, "Index", "Player");
+        }
+    }
+}

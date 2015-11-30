@@ -4,13 +4,20 @@
     ViewBag.Title = "LeagueTeams";
 }
 
-<h2>LeagueTeams</h2>
-<h1>SOMETHING SHOW UP DEAR GOD</h1>
-@foreach (var team in Model.Teams)
-{
-    
-    <p>      
-@team.TeamID.ToString();
-    </p>
-}
+<h2>ÌLEAGUE'TEAMSÍ</h2>
+<div class="row">
+    <div class="col-md-offset-5 col-md-2">
+        <div class="col-center-block">
+            @foreach (var team in Model.Teams)
+            {
 
+                using (Html.BeginForm("Index", "Player", null, FormMethod.Post))
+                {
+                    @Html.Hidden("TeamID", team.TeamID)
+                    <button id="details" class="btn btn-primary btn-block margin-top-20">@team.TeamName</button>
+                }
+
+            }
+        </div>
+    </div>
+</div>

@@ -38,9 +38,5 @@ namespace BaseballLeague.UI.Controllers
 
         //[HttpPost]
         //public ActionResult AddTeam
-
-
-
-
     }
 }

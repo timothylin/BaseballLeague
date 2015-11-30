@@ -92,8 +92,14 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\img\1448770433_icon-2-baseball.svg" />
+    <Content Include="Content\img\1448770443_icon-2-baseball.svg" />
+    <Content Include="Content\img\logo-placeholder.jpg" />
     <Content Include="Content\Site.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="fonts\lobster\lobster_1.3-webfont.svg" />
+    <Content Include="fonts\norwesterFont\norwester-webfont.svg" />
+    <Content Include="fonts\yorkwhiteletter\yorkwhiteletter-webfont.svg" />
     <Content Include="Global.asax" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -140,6 +146,22 @@
     <Content Include="Scripts\angular-cookies.min.js.map" />
     <Content Include="Scripts\angular-aria.min.js.map" />
     <Content Include="Scripts\angular-animate.min.js.map" />
+    <Content Include="fonts\norwesterFont\norwester-webfont.eot" />
+    <Content Include="fonts\norwesterFont\norwester-webfont.ttf" />
+    <Content Include="fonts\norwesterFont\norwester-webfont.woff" />
+    <Content Include="fonts\norwesterFont\norwester-webfont.woff2" />
+    <Content Include="fonts\lobster\lobster_1.3-webfont.eot" />
+    <Content Include="fonts\lobster\lobster_1.3-webfont.ttf" />
+    <Content Include="fonts\lobster\lobster_1.3-webfont.woff" />
+    <Content Include="fonts\lobster\lobster_1.3-webfont.woff2" />
+    <Content Include="fonts\yorkwhiteletter\yorkwhiteletter-webfont.eot" />
+    <Content Include="fonts\yorkwhiteletter\yorkwhiteletter-webfont.ttf" />
+    <Content Include="fonts\yorkwhiteletter\yorkwhiteletter-webfont.woff" />
+    <Content Include="fonts\yorkwhiteletter\yorkwhiteletter-webfont.woff2" />
+    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\jquery-1.10.2.js" />
+    <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <Content Include="Scripts\jquery-1.10.2.min.map" />
     <None Include="Scripts\jquery-2.1.4.intellisense.js" />
     <Content Include="Scripts\i18n\angular-locale_aa-dj.js" />
     <Content Include="Scripts\i18n\angular-locale_aa-er.js" />
@@ -927,6 +949,7 @@
     <Content Include="Views\Player\DeletePlayer.cshtml" />
     <Content Include="Views\Player\ConfirmDeletePlayer.cshtml" />
     <Content Include="Views\Home\CreateLeagueForm.cshtml" />
+    <Content Include="Views\Shared\NavTeams.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

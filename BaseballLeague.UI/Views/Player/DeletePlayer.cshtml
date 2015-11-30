@@ -3,7 +3,7 @@
     ViewBag.Title = "DeletePlayer";
 }
 
-<h2>Delete Player</h2>
+<h2>ÌDELETE'PLAYERÍ</h2>
 
 <div class="container">
     <div class="col-lg-5 col-md-5 col-sm-12 col-center-block">
@@ -59,13 +59,13 @@
             @using (Html.BeginForm("ConfirmDeletePlayer", "Player", null, FormMethod.Post))
             {
                 @Html.Hidden("playerID", Model.PlayerID)
-                <button id="deletePlayer" class="btn btn-danger">Confirm</button>
+                <button id="deletePlayer" class="btn btn-primary">Confirm</button>
             }
         </div>
         <div class="col-xs-6">
             @using (Html.BeginForm("Index", "Home", null, FormMethod.Post))
             {
-                <button id="cancel" class="btn btn-primary">Cancel</button>
+                <button id="cancel" class="btn btn-warning">Cancel</button>
             }
 
         </div>
