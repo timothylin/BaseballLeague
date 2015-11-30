@@ -1,4 +1,4 @@
-﻿@model List<BaseballLeague.Models.Player>
+﻿@model BaseballLeague.UI.Models.TeamPlayersVM
 
 @{
     ViewBag.Title = "Index";
@@ -6,6 +6,7 @@
 
 <h2>ÌPLAYERSÍ</h2>
 
+@*<<<<<<< HEAD
 <div class="row">
     <div class="panel-heading">
         <table style="width:100%">
@@ -17,7 +18,7 @@
                 <th>Batting Avg.</th>
             </tr>
             
-            @foreach (var player in Model)
+            @foreach (var player in Model.Players)
             {
                 <tr>
                     <td>@player.PlayerName</td>
@@ -29,5 +30,78 @@
                 </tr>
             }
         </table>
+=======*@
+<div class="container">
+    <h3 class="padding-top-20 margin-left-10"> @Model.TeamName Players</h3>
+    <div class="container">
+        <div class="row hidden-sm hidden-xs">
+            <div class="col-sm-3 margin-left-50"><h6>Team Name</h6></div>
+            <div class="col-sm-2"><h6>Manager Name</h6></div>
+            @*<div class="col-sm-2 margin-left-50"><h6>MPAA Rating</h6></div>*@
+        </div>
+    </div>
+    <ul class="list">
+        @foreach (var player in Model.Players)
+        {
+            <li class="list-no-style">
+                <div class="no-container">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+
+                            <div class="row margin-top-10">
+
+                                <div class="col-sm-3 margin-top-35 margin-left-10 hidden-sm hidden-xs">
+                                    <p>Player Name</p>
+                                    <p>@player.PlayerName</p>
+                                </div>
+                                <div class="col-sm-3 margin-top-35 hidden-sm hidden-xs">
+                                    <p>Number</p>
+                                    <p>@player.JerseyNumber</p>
+                                </div>
+                                <div class="col-sm-3 margin-top-35 hidden-sm hidden-xs">
+                                    <p>Position</p>
+                                    <p>@player.Position.PositionName</p>
+                                </div>
+                                <div class="col-sm-3 margin-top-35 hidden-sm hidden-xs">
+                                    <p>Batting Avg.</p>
+                                    <p>@player.BattingAverage</p>
+                                </div>
+                                <div class="col-sm-3 margin-top-35 hidden-sm hidden-xs">
+                                    <p>Years Played</p>
+                                    <p>@player.YearsPlayed</p>
+                                </div>
+                                @*<div class="col-sm-1 margin-top-35 hidden-sm hidden-xs">
+                                        <p>@Team.TeamID</p>
+                                    </div>*@
+
+                                @*//Button to go to a list of players for the team clicked*@
+                                <div class="col-md-4 col-xs-12">
+                                    <div class="col-xs-6">
+                                        @using (Html.BeginForm("Index", "Team", null, FormMethod.Post))
+                                        {
+                                            @*@Html.Hidden("TeamID", team.TeamID)*@
+                                            <button id="details" class="btn btn-primary btn-block">Teams Page</button>
+                                        }
+                                    </div>
+
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        }
+    </ul>
+
+    <div class="col-md-4 col-xs-12">
+        <div class="col-xs-6">
+            @using (Html.BeginForm("AddTeam", "Team", null, FormMethod.Post))
+            {
+                @*@Html.Hidden("TeamID", Model.)*@
+                <button id="details" class="btn btn-success btn-block">Add Team</button>
+            }
+        </div>
     </div>
 </div>
