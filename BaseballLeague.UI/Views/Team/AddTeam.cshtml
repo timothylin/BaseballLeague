@@ -1,4 +1,5 @@
-﻿@model BaseballLeague.UI.Models.TeamVM
+﻿@using System.Web.UI.WebControls
+@model BaseballLeague.UI.Models.TeamVM
 
 @{
     ViewBag.Title = "AddTeam";
@@ -43,9 +44,13 @@
             }
 
             <div>
+<<<<<<< HEAD
 
                 
 
+=======
+                @Html.ActionLink("Back to List", "Index", new {@class = "btn btn-danger"})
+>>>>>>> 1dc094a0e75b595afbe88bc182f007d8b9661907
             </div>
             </div>
         </div>
