@@ -225,8 +225,7 @@ namespace BaseballLeague.DataLayer
                 var pnsm = new DynamicParameters();
                 pnsm.Add("@TeamName", team.TeamName);
                 pnsm.Add("@Manager", team.Manager);
-                pnsm.Add("@LeagueID", team.League.LeagueID)
-                    ;
+                pnsm.Add("@LeagueID", team.League.LeagueID);
                 pnsm.Add("@TeamID", DbType.Int32, direction: ParameterDirection.Output);
 
                 cn.Execute("InsertTeams", pnsm, commandType: CommandType.StoredProcedure);
