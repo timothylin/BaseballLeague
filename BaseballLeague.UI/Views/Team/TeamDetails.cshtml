@@ -1,0 +1,31 @@
+﻿@model BaseballLeague.Models.Team
+
+@{
+    ViewBag.Title = "TeamDetails";
+}
+
+<h2>ÌNEW'TEAMÍ</h2>
+
+<div class="container col-center-block">
+    <div class="row">
+        <div class="col-md-10"></div>
+        <div class="panel panel-default">
+
+            <div class="row margin-top-10">
+
+                <div class="col-sm-3 margin-top-35 padding-left-20">
+                    <p>Team Name</p>
+                    <p>@Model.TeamName</p>
+                </div>
+                <div class="col-sm-3 margin-top-35 hidden-sm hidden-xs">
+                    <p>League Name</p>
+                    <p>@Model.League.LeagueName</p>
+                </div>
+                <div class="col-sm-3 margin-top-35 padding-left-20">
+                    <p>Manager</p>
+                    <p>@Model.Manager</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

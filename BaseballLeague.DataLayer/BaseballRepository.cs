@@ -114,6 +114,33 @@ namespace BaseballLeague.DataLayer
         }
 
 
+        public League GetLeagueByID(int leagueID)
+        {
+            var league = new League();
+
+            using (SqlConnection cn = new SqlConnection(Settings.ConnectionString))
+            {
+                SqlCommand cmd = new SqlCommand();
+
+                cmd.CommandText = "GetLeagueByID";
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Connection = cn;
+                cmd.Parameters.AddWithValue("@LeagueID", leagueID);
+
+                cn.Open();
+
+                using (SqlDataReader dr = cmd.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        league = PopulateLeagueInfoFromReader(dr);
+                    }
+                }
+            }
+
+            return league;
+        }
+
         //for testing creating a method to check if player table is updated and then setup methods for response on bll 
 
         public Player GetPlayerByID(int playerID)

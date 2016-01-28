@@ -13,6 +13,16 @@ namespace BaseballLeague.UI.ConsoleApp
     {
         static void Main(string[] args)
         {
+
+            //var repo = new BaseballRepository();
+
+            //var league = repo.GetLeagueByID(1);
+
+            //Console.WriteLine(league.LeagueName);
+            //Console.WriteLine(league.LeagueID);
+
+            //Console.ReadLine();
+
             //CreatePlayer();
 
             //RemovePlayer(15);

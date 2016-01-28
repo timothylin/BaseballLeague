@@ -64,6 +64,21 @@ namespace BaseballLeague.BLL
         }
 
 
+        public Response GetLeagueByID(int leagueID)
+        {
+            var league = _repo.GetLeagueByID(leagueID);
+            _response = new Response();
+
+            if (league != null)
+            {
+                _response.Success = true;
+                _response.League = league;
+            }
+
+            return _response;
+        }
+
+
         public Response GetPlayerByID(int playerID)
         {
             var player = _repo.GetPlayerByID(playerID);

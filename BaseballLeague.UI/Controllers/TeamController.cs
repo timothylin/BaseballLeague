@@ -36,7 +36,24 @@ namespace BaseballLeague.UI.Controllers
             return View(tvm);
         }
 
-        //[HttpPost]
-        //public ActionResult AddTeam
+        [HttpPost]
+        public ActionResult AddTeam(TeamVM vm)
+        {
+            var ops = new BaseballOperations();
+
+            var response = ops.GetAllLeagues();
+            vm.CreateLeagueList(response.Leagues);
+
+            if (ModelState.IsValid)
+            {
+                var opsResponse = ops.AddTeam(vm.Team);
+                opsResponse.Team.League = ops.GetLeagueByID(vm.Team.League.LeagueID).League;
+                return View("TeamDetails", opsResponse.Team);
+            }
+            else
+            {
+                return View("AddTeam");
+            }
+        }
     }
 }

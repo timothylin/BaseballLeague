@@ -950,6 +950,7 @@
     <Content Include="Views\Player\ConfirmDeletePlayer.cshtml" />
     <Content Include="Views\Home\CreateLeagueForm.cshtml" />
     <Content Include="Views\Shared\NavTeams.cshtml" />
+    <Content Include="Views\Team\TeamDetails.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

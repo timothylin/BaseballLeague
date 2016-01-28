@@ -61,9 +61,11 @@ namespace BaseballLeague.UI.Controllers
 
             if (ModelState.IsValid)
             {
-                ops.CreatePlayer(addP.player);
+                var playerResponse = ops.CreatePlayer(addP.player);
+                playerResponse.Player.Position =
+                    ops.GetAllPositions().Positions.FirstOrDefault(p => p.PositionID == addP.player.Position.PositionID);
 
-                return View("PlayerDetails", addP.player);
+                return View("PlayerDetails", playerResponse.Player);
             }
             else
             {
